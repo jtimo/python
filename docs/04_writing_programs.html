@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Writing Programs – Python for Engineers and Scientists (v1.0)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_numerical_computing_using_numpy.html" rel="next">
+<link href="./03_control_structures.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/book_cover.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python for Engineers and Scientists (v1.0)</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_writing_programs.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing Programs</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_representing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Representing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_control_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Control Structures</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_writing_programs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing Programs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_numerical_computing_using_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Numerical Computing using NumPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_data_analysis_using_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data processing using Pandas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_visualization_using_matplotlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_scientific_computing_using_scipy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Scientific Python</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_machine_learning_using_scikitlearn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Scikit-Learn for Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">About</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#programming-paradigms" id="toc-programming-paradigms" class="nav-link active" data-scroll-target="#programming-paradigms"><span class="header-section-number">4.1</span> Programming Paradigms</a></li>
+  <li><a href="#building-blocks-of-a-program" id="toc-building-blocks-of-a-program" class="nav-link" data-scroll-target="#building-blocks-of-a-program"><span class="header-section-number">4.2</span> Building blocks of a Program</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">4.3</span> Functions</a>
+  <ul class="collapse">
+  <li><a href="#args-and-kwargs" id="toc-args-and-kwargs" class="nav-link" data-scroll-target="#args-and-kwargs"><span class="header-section-number">4.3.1</span> args and kwargs</a></li>
+  </ul></li>
+  <li><a href="#lambda-and-special-functions" id="toc-lambda-and-special-functions" class="nav-link" data-scroll-target="#lambda-and-special-functions"><span class="header-section-number">4.4</span> Lambda and special functions</a>
+  <ul class="collapse">
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map"><span class="header-section-number">4.4.1</span> Map</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">4.4.2</span> Filter</a></li>
+  <li><a href="#reduce" id="toc-reduce" class="nav-link" data-scroll-target="#reduce"><span class="header-section-number">4.4.3</span> Reduce</a></li>
+  </ul></li>
+  <li><a href="#decorators" id="toc-decorators" class="nav-link" data-scroll-target="#decorators"><span class="header-section-number">4.5</span> Decorators</a>
+  <ul class="collapse">
+  <li><a href="#finding-square-root" id="toc-finding-square-root" class="nav-link" data-scroll-target="#finding-square-root"><span class="header-section-number">4.5.1</span> Finding Square Root</a></li>
+  </ul></li>
+  <li><a href="#classes" id="toc-classes" class="nav-link" data-scroll-target="#classes"><span class="header-section-number">4.6</span> Classes</a>
+  <ul class="collapse">
+  <li><a href="#inheritance-in-python" id="toc-inheritance-in-python" class="nav-link" data-scroll-target="#inheritance-in-python"><span class="header-section-number">4.6.1</span> Inheritance in Python</a></li>
+  <li><a href="#class-decorators" id="toc-class-decorators" class="nav-link" data-scroll-target="#class-decorators"><span class="header-section-number">4.6.2</span> Class Decorators</a></li>
+  <li><a href="#double-underscore-methods" id="toc-double-underscore-methods" class="nav-link" data-scroll-target="#double-underscore-methods"><span class="header-section-number">4.6.3</span> __ Double Underscore methods</a></li>
+  <li><a href="#encapsulation" id="toc-encapsulation" class="nav-link" data-scroll-target="#encapsulation"><span class="header-section-number">4.6.4</span> Encapsulation</a></li>
+  </ul></li>
+  <li><a href="#a-functioning-program" id="toc-a-functioning-program" class="nav-link" data-scroll-target="#a-functioning-program"><span class="header-section-number">4.7</span> A functioning program:</a></li>
+  <li><a href="#a-program-in-three-paradigms" id="toc-a-program-in-three-paradigms" class="nav-link" data-scroll-target="#a-program-in-three-paradigms"><span class="header-section-number">4.8</span> A Program in three Paradigms</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.9</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">4.9.1</span> Theory</a></li>
+  <li><a href="#coding" id="toc-coding" class="nav-link" data-scroll-target="#coding"><span class="header-section-number">4.9.2</span> Coding</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">4.10</span> Further Reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing Programs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Programming is the art and science of instructing computers to perform specific tasks by writing sets of instructions, also known as code, using a programming language. It is a fundamental skill in today’s digital age, underpinning the software that powers everything from smartphones and websites to complex scientific simulations and artificial intelligence.</p>
+<div id="cell-reaction_diffusion" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reaction_diffusion(num_iterations, width, height):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    feed <span class="op">=</span> <span class="fl">0.055</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    kill <span class="op">=</span> <span class="fl">0.062</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    diff_a <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    diff_b <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> np.ones((width, height))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.zeros((width, height))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> initialize_pattern(a, b):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        mid_x, mid_y <span class="op">=</span> width <span class="op">//</span> <span class="dv">2</span>, height <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        a[mid_x<span class="op">-</span><span class="dv">10</span>:mid_x<span class="op">+</span><span class="dv">10</span>, mid_y<span class="op">-</span><span class="dv">10</span>:mid_y<span class="op">+</span><span class="dv">10</span>] <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        b[mid_x<span class="op">-</span><span class="dv">10</span>:mid_x<span class="op">+</span><span class="dv">10</span>, mid_y<span class="op">-</span><span class="dv">10</span>:mid_y<span class="op">+</span><span class="dv">10</span>] <span class="op">=</span> <span class="fl">0.25</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    initialize_pattern(a, b)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> laplacian(mat):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="op">-</span>mat</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> (np.roll(mat, <span class="dv">1</span>, axis<span class="op">=</span><span class="dv">0</span>) <span class="op">+</span> np.roll(mat, <span class="op">-</span><span class="dv">1</span>, axis<span class="op">=</span><span class="dv">0</span>) <span class="op">+</span> np.roll(mat, <span class="dv">1</span>, axis<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> np.roll(mat, <span class="op">-</span><span class="dv">1</span>, axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">+</span> <span class="fl">0.05</span> <span class="op">*</span> (np.roll(mat, (<span class="dv">1</span>, <span class="dv">1</span>), axis<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span> np.roll(mat, (<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), axis<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span> np.roll(mat, (<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), axis<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span> np.roll(mat, (<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>), axis<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>)))</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        a_diff <span class="op">=</span> laplacian(a)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        b_diff <span class="op">=</span> laplacian(b)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        reaction <span class="op">=</span> a <span class="op">*</span> b <span class="op">*</span> b</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        a <span class="op">+=</span> diff_a <span class="op">*</span> a_diff <span class="op">-</span> reaction <span class="op">+</span> feed <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> a)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        b <span class="op">+=</span> diff_b <span class="op">*</span> b_diff <span class="op">+</span> reaction <span class="op">-</span> (kill <span class="op">+</span> feed) <span class="op">*</span> b</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        np.clip(a, <span class="dv">0</span>, <span class="dv">1</span>, out<span class="op">=</span>a)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        np.clip(b, <span class="dv">0</span>, <span class="dv">1</span>, out<span class="op">=</span>b)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a, b</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">6000</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>width, height <span class="op">=</span> <span class="dv">200</span>, <span class="dv">200</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> reaction_diffusion(num_iterations, width, height)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for a</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.imshow(a, cmap<span class="op">=</span><span class="st">'Spectral'</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$c_A(t)$'</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for b</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>plt.imshow(b, cmap<span class="op">=</span><span class="st">'Spectral'</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$c_B(t)$'</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<figcaption>The Gray-Scott Model for Diffusion and Reaction</figcaption>
+<p><a href="04_writing_programs_files/figure-html/reaction_diffusion-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="The Gray-Scott Model for Diffusion and Reaction"><img src="04_writing_programs_files/figure-html/reaction_diffusion-output-1.png" width="614" height="311" alt="The Gray-Scott Model for Diffusion and Reaction" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>At its core, programming involves problem-solving. Programmers analyze problems, break them down into smaller, manageable parts, and then create algorithms, which are step-by-step instructions that tell a computer how to solve those problems. These instructions are written in a programming language, which acts as an intermediary between human-readable code and the computer’s binary language of 0s and 1s.</p>
+<p>Programming languages come in various forms, from high-level languages like Python, Java, and C++ that are easier for humans to understand and write, to low-level languages like Assembly that are closer to the computer’s native language. Each language has its strengths and weaknesses, making it suitable for different types of tasks.</p>
+<p>Once a program is written, it needs to be translated into machine code through a process called compilation or interpretation, depending on the language. The resulting executable program can then be run on a computer, automating various tasks or solving specific problems.</p>
+<p>Programming is a versatile skill that can be applied in virtually every field, from web development and mobile app creation to data analysis, robotics, and artificial intelligence. It empowers individuals and organizations to automate tasks, improve efficiency, and innovate by creating software solutions to complex problems.</p>
+<p>Learning to program is not only about mastering syntax and language features but also about developing problem-solving and critical-thinking skills. It’s a creative and empowering endeavor that allows individuals to turn their ideas into functional software, making programming an essential and continuously evolving discipline in the modern world.</p>
+<section id="programming-paradigms" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="programming-paradigms"><span class="header-section-number">4.1</span> Programming Paradigms</h2>
+<p>Programming paradigms are fundamental styles or approaches to writing computer programs. They represent a set of principles, concepts, and techniques that guide how software is structured, organized, and executed. Each programming paradigm has its own philosophy and methodology for solving problems and building software. Here are some of the most commonly recognized programming paradigms:</p>
+<p><strong>Imperative Programming:</strong></p>
+<p>Imperative programming is a paradigm that focuses on changing a program’s state through sequences of statements or commands. In this paradigm, programs maintain mutable state variables that can be modified during execution. Control structures like loops and conditionals are commonly used to manage program flow.</p>
+<p>Mathematically, imperative programming can be abstractly represented as a sequence of commands that modify a program’s state. For example, you might have an initial state <span class="math inline">\(S\)</span> and then update it with a command like <span class="math inline">\(S' = \text{updateState}(S)\)</span>, where <span class="math inline">\(S\)</span> and <span class="math inline">\(S'\)</span> represent the program state before and after executing a command, and <span class="math inline">\(\text{updateState}\)</span> is a command that modifies the state.</p>
+<p>Key concepts in imperative programming include variables for storing data, loops (e.g., for, while, do-while) for repetitive tasks, conditionals (e.g., if, else if, else) for decision-making, and procedures/functions for organizing code.</p>
+<p><strong>Functional Programming:</strong></p>
+<p>Functional programming is a paradigm that emphasizes immutability, meaning that once data is created, it cannot be changed. In functional programming, functions are pure, meaning they have no side effects and return consistent results for the same inputs. Functions are treated as first-class citizens, allowing them to be treated as values in the code.</p>
+<p>Mathematically, functional programming can be represented as compositions of pure functions. For instance, you might have an equation like <span class="math inline">\(Y = f(g(X), h(Z))\)</span>, where <span class="math inline">\(Y\)</span> represents the result, and <span class="math inline">\(f\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(h\)</span> are pure functions operating on inputs <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>.</p>
+<p>Key concepts in functional programming include pure functions, immutability (data cannot be changed once created), higher-order functions (functions that take other functions as arguments or return them), and recursion (often used instead of loops).</p>
+<p><strong>Object-Oriented Programming (OOP):</strong></p>
+<p>Object-oriented programming is a paradigm that revolves around objects, which encapsulate both data (attributes) and behavior (methods). Objects are instances of classes, which define blueprints for creating objects with shared attributes and methods. OOP also incorporates concepts like inheritance, where classes can inherit attributes and methods from parent classes, and encapsulation, which involves hiding internal details and exposing a public interface.</p>
+<p>Mathematically, OOP can be represented as interactions between objects and classes. For example, you might have an equation like <span class="math inline">\(Y = X.\text{method}()\)</span>, where <span class="math inline">\(Y\)</span> represents the result, <span class="math inline">\(X\)</span> is an object, and <span class="math inline">\(\text{method}()\)</span> is a method of the object.</p>
+<p>Key concepts in OOP include objects (instances of classes with attributes and methods), classes (blueprints for creating objects), inheritance (a mechanism for sharing attributes and methods between classes), and encapsulation (hiding internal implementation details and exposing a public interface).</p>
+</section>
+<section id="building-blocks-of-a-program" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="building-blocks-of-a-program"><span class="header-section-number">4.2</span> Building blocks of a Program</h2>
+<p>The building blocks of programs are fundamental components and concepts that are used to create software and instruct computers to perform specific tasks. These building blocks can vary somewhat depending on the programming language, but they generally include the following key elements:</p>
+<ol type="1">
+<li><p><strong>Variables:</strong> Variables are used to store and manipulate data in a program. They can hold various types of information, such as numbers, text, or complex data structures. Variables have names and values that can change during the execution of a program.</p></li>
+<li><p><strong>Data Types:</strong> Programming languages have different data types, such as integers, floating-point numbers, strings, booleans, and more. Data types define the kind of values that variables can hold and the operations that can be performed on them.</p></li>
+<li><p><strong>Operators:</strong> Operators are symbols or keywords used to perform operations on data. Common operators include addition (+), subtraction (-), multiplication (*), division (/), comparison (==, !=, &lt;, &gt;, etc.), and logical operations (&amp;&amp;, ||, !).</p></li>
+<li><p><strong>Arrays and Collections:</strong> These data structures allow you to group multiple pieces of data into a single variable. Arrays and collections make it easier to work with large sets of related data.</p></li>
+<li><p><strong>Input and Output (I/O):</strong> Programs often need to interact with the outside world. Input mechanisms like keyboard input or reading from files, and output mechanisms like printing to the console or writing to files, enable programs to communicate with users and external devices.</p></li>
+<li><p><strong>Control Structures:</strong> Control structures determine the flow of a program’s execution. They include:</p>
+<ul>
+<li><strong>Conditional Statements:</strong> These allow you to make decisions in your code. Common conditional statements include if, else if, else, and switch.</li>
+<li><strong>Loops:</strong> Loops, such as for, while, and do-while, enable you to repeat a block of code multiple times.</li>
+<li><strong>Branching:</strong> Branching mechanisms like break and continue can control the flow within loops and switch statements.</li>
+</ul></li>
+<li><p><strong>Functions/Methods:</strong> Functions (or methods, depending on the language) are reusable blocks of code that perform a specific task. They encapsulate logic, accept input (parameters), and can return results. Functions help modularize code and make it more maintainable.</p></li>
+<li><p><strong>Comments:</strong> Comments are not executed by the program but provide explanations and documentation for code. They are essential for making code more readable and understandable for developers and maintainers.</p></li>
+<li><p><strong>Error Handling:</strong> Programs need to handle errors and exceptions gracefully. Exception handling constructs allow you to catch and manage errors to prevent crashes and provide user-friendly error messages.</p></li>
+<li><p><strong>Classes and Objects:</strong> In object-oriented programming languages like Java and Python, classes and objects are fundamental. Classes define blueprints for creating objects, which are instances of those classes. They encapsulate data and behavior into reusable, organized structures.</p></li>
+<li><p><strong>Libraries and APIs:</strong> Programs often leverage pre-built libraries and application programming interfaces (APIs) to access external functionality. These resources provide a wide range of capabilities, from working with graphics to handling network communications.</p></li>
+<li><p><strong>Documentation:</strong> Proper documentation, including comments, inline documentation, and external documentation files, is crucial for making code understandable and maintainable.</p></li>
+</ol>
+<p>These building blocks, when combined and structured effectively, allow programmers to design and create complex software solutions for a wide range of applications. The choice of programming language may influence how these building blocks are used, but the fundamental concepts remain consistent across most programming paradigms and languages.</p>
+</section>
+<section id="functions" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="functions"><span class="header-section-number">4.3</span> Functions</h2>
+<p>In programming, a function is a reusable piece of code that performs a specific task. It can take input, perform operations on that input, and then return output. Functions are essential building blocks of any program, and they allow programmers to create modular, reusable code that can be called from different parts of a program.</p>
+<p>In Python, functions are defined using the def keyword, followed by the function name and any input parameters in parentheses. The function body is then indented below the function definition. Here’s an example of a simple function that takes two numbers as input and returns their sum:</p>
+<div class="alert alert-block alert-info">
+<b>Task</b>: Compute the area of circular disks for radius from 1mm to 20mm !
+</div>
+<div id="73eff6b9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> area_of_disk(r<span class="op">=</span><span class="dv">2</span>, pressure<span class="op">=</span><span class="dv">20</span>): <span class="co"># r is the argument, default value is 2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    This is a function for computing the area of a disk !</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> pressure <span class="op">*</span> <span class="fl">3.14</span> <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7bd4eb0a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_new_disk <span class="op">=</span> area_of_disk(r<span class="op">=</span><span class="dv">10</span>, pressure<span class="op">=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="05f7b1a9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_new_disk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>9420.0</code></pre>
+</div>
+</div>
+<p>Having specified the function, we can now use the function in a variety of ways ! This piece of code can be re-used multiple times by simply specifying the identifier i.e.&nbsp;the function name. We do not have the write the full code again.</p>
+<div id="310515e6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the function defined above inside a loop</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(r, area_of_disk(r))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 62.800000000000004
+2 251.20000000000002
+3 565.2</code></pre>
+</div>
+</div>
+<p>We could have also directly put the formula inside the for loop. However, in case we want to use the formula again in our program, then we have to type the formula. By using functions, our formula becomes portable.</p>
+<p>Parameters and variables defined inside a function are not available outside of the function. Hence, they have a local scope and the return statement is required to return the processed data !</p>
+<p>Historically, the concept of functions can be traced back to the earliest days of computer programming. Early programming languages like FORTRAN and COBOL introduced the concept of subroutines, which were essentially functions that could be called from different parts of a program. Later languages like C and Pascal expanded on this concept, introducing functions that could take parameters and return values.</p>
+<p>Python was first released in 1991 and quickly gained popularity due to its ease of use and readability. The concept of functions has been a fundamental part of the language since its inception. Python’s support for functions has made it a popular choice for scientific computing, web development, and many other domains.</p>
+<p>In the future, the concept of functions will continue to be an important part of programming, as it allows developers to create modular, reusable code. As programming languages continue to evolve and new technologies emerge, the concept of functions will likely remain a fundamental building block of software development.</p>
+<section id="args-and-kwargs" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="args-and-kwargs"><span class="header-section-number">4.3.1</span> args and kwargs</h3>
+<p>In Python, args and kwargs are special parameters that allow you to pass a variable number of arguments to a function. args stands for “arguments” and is used to pass a variable number of non-keyword arguments to a function. It is represented by a tuple of values. kwargs stands for “keyword arguments” and is used to pass a variable number of keyword arguments to a function. It is represented by a dictionary of key-value pairs.</p>
+<div id="b64e311b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    a function that prints args and kwargs!</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(args) <span class="co"># args is a tuple with a list of elements</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(kwargs) <span class="co"># kwargs is a dictionary with key value pairs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="08cbbed5" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_function(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, a<span class="op">=</span><span class="st">'hello'</span>, b<span class="op">=</span><span class="st">'world'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1, 2, 3)
+{'a': 'hello', 'b': 'world'}</code></pre>
+</div>
+</div>
+<p>In this example, <code>*args</code> collects any number of non-keyword arguments passed to the function and packs them into a tuple. <code>**kwargs</code> collects any number of keyword arguments passed to the function and packs them into a dictionary. Note that args and kwargs are just conventions, and you can use any other variable names instead. However, using these conventions makes it easier for other developers to understand your code.</p>
+<p>The single star * and double star ** in front of args and kwargs, respectively, are known as the “unpacking operators” in Python. They are used to unpack sequences and dictionaries, respectively, into separate arguments when calling a function.</p>
+<p>When you use <code>*args</code> in a function definition, it tells Python to accept any number of positional arguments (i.e., arguments that are not passed as key-value pairs) and pack them into a tuple. Similarly, when you use <code>**kwargs</code>, it tells Python to accept any number of keyword arguments (i.e., arguments that are passed as key-value pairs) and pack them into a dictionary.</p>
+<p>When you call a function that uses <code>*args</code> and <code>**kwargs</code>, you can use the unpacking operators to pass a sequence or dictionary as separate arguments to the function. Here’s an example:</p>
+<div id="b576962a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function(a, b, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    a function that prints two non-keyword parameters and the args and kwargs</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'args=</span><span class="sc">{</span>args<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'kwargs=</span><span class="sc">{</span>kwargs<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2c4e3d99" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_tuple <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">'x'</span>: <span class="dv">4</span>, <span class="st">'y'</span>: <span class="dv">5</span>, <span class="st">'z'</span>: <span class="dv">6</span>}</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>my_function(<span class="dv">0</span>, <span class="dv">9</span>, <span class="op">*</span>my_tuple, <span class="op">**</span>my_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a=0, b=9
+args=(10, 20, 30)
+kwargs={'x': 4, 'y': 5, 'z': 6}</code></pre>
+</div>
+</div>
+<div id="59e52473" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function_1(parameter_1<span class="op">=</span><span class="dv">2</span>, parameter_2<span class="op">=</span><span class="dv">100</span>, parameter_3<span class="op">=</span><span class="dv">30</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">    this function takes in two parameters and computes the product and sum of the parameters</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    product_of_parameters <span class="op">=</span> parameter_1 <span class="op">*</span> parameter_2 <span class="op">*</span> parameter_3</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    sum_of_parameters <span class="op">=</span> parameter_1 <span class="op">+</span> parameter_2 <span class="op">+</span> parameter_3</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (product_of_parameters, sum_of_parameters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="04623367" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variable_1 <span class="op">=</span> my_function_1(parameter_1<span class="op">=</span><span class="dv">1650</span>, parameter_2<span class="op">=</span><span class="dv">1420</span>, parameter_3<span class="op">=</span><span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bf0ec237" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>variable_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>(117150000, 3120)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="lambda-and-special-functions" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="lambda-and-special-functions"><span class="header-section-number">4.4</span> Lambda and special functions</h2>
+<p>Lambda functions are a way to create small functions in Python. They are defined using the lambda keyword and are often used as a quick way to define a function that will only be used once.</p>
+<p>Here’s an example of a lambda function that takes a single argument and returns its square:Lambda functions are one-line functions ! Also called anonymous functions. Often used to specify functions within another function !</p>
+<div id="ecbd2f76" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="8a8445db" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> <span class="kw">lambda</span> r : math.pi <span class="op">*</span> r <span class="op">*</span> r  <span class="co"># function to generate the area of a circle given the area</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1eae4bcc" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(area(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>12.566370614359172</code></pre>
+</div>
+</div>
+<section id="map" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="map"><span class="header-section-number">4.4.1</span> Map</h3>
+<p>The <code>map()</code> function in Python takes a function and an iterable as input, and returns a new iterable where each element has been transformed by the function. Here’s an example:</p>
+<div id="0d57c8fc" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d72c0acd" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function_test(x):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">    a function to return the square of the input scalar</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ac33232d" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>squares_function <span class="op">=</span> <span class="bu">map</span>(my_function_test, numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7cff0cfa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(squares_function)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>[1, 4, 9, 16, 25]</code></pre>
+</div>
+</div>
+<div id="1559dc38" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>squares_lambda <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span>, numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f8c67353" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(squares_lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>[1, 4, 9, 16, 25]</code></pre>
+</div>
+</div>
+<p>In this example, numbers is an iterable containing the numbers 1 through 5. The <code>map()</code> function applies the lambda function lambda x: x**2 to each element in the iterable, returning a new iterable containing the squares of each number. The squares variable in this example will contain the iterable [1, 4, 9, 16, 25].</p>
+</section>
+<section id="filter" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">4.4.2</span> Filter</h3>
+<p>The <code>filter()</code> function in Python takes a function and an iterable as input, and returns a new iterable containing only the elements for which the function returns True. Here’s an example:</p>
+<div id="ea50b475" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">1000</span>, <span class="dv">1200</span>, <span class="dv">1201</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="09037540" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate the functionality of the filter function ! filter(condition, data structure)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>even_numbers <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>, numbers)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(even_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>[2, 4, 6, 8, 10, 1000, 1200]</code></pre>
+</div>
+</div>
+<p>In this example, numbers is an iterable containing the numbers 1 through 5. The <code>filter()</code> function applies the lambda function lambda x: x % 2 == 0 to each element in the iterable, returning a new iterable containing only the even numbers. The even_numbers variable in this example will contain the iterable [2, 4].</p>
+</section>
+<section id="reduce" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="reduce"><span class="header-section-number">4.4.3</span> Reduce</h3>
+<p>The <code>reduce()</code> function in Python takes a function and an iterable as input, and returns a single value that is the result of applying the function to the iterable in a cumulative way. Here’s an example:</p>
+<div id="201bfe3a" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># demonstrate the functionality of the reduce function</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>difference <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x, y: x <span class="op">-</span> y, numbers) <span class="co"># (((1 - 2) - 3) - 4) - 5</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(difference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-13</code></pre>
+</div>
+</div>
+<p>In this example, numbers is an iterable containing the numbers 1 through 5. The <code>reduce()</code> function applies the lambda function lambda x, y: x * y to the first two elements in the iterable (1 and 2), then applies the same function to the result and the next element in the iterable (3), and so on, until all elements in the iterable have been processed.</p>
+</section>
+</section>
+<section id="decorators" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="decorators"><span class="header-section-number">4.5</span> Decorators</h2>
+<p>Decorators in Python are a powerful feature that allow you to modify the behavior of a function or method without changing its code. They are widely used in scientific and engineering applications for purposes such as timing functions, caching results, or enforcing type checks. Here’s a practical example related to scientific computing where decorators can be particularly useful:</p>
+<ul>
+<li><p>These are higher-order functions that take a function as an argument and return a new function with enhanced functionality.</p></li>
+<li><p>Decorators wrap a function, modifying its behavior.</p></li>
+<li><p>Defined with the <code>@</code> symbol, followed by the decorator name, placed above the function definition.</p></li>
+<li><p>A decorator is just a callable Python object that is used to modify a function or a class.</p></li>
+<li><p>Example of a simple decorator:</p></li>
+</ul>
+<div id="71ca3028" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_decorator(func):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper():</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Something is happening before the function is called."</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        func()</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Something is happening after the function is called."</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="at">@my_decorator</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> say_hello():</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello!"</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>say_hello()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Something is happening before the function is called.
+Hello!
+Something is happening after the function is called.</code></pre>
+</div>
+</div>
+<div id="bab0b29a" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the decorator</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> log_execution_time(func):</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>        start_time <span class="op">=</span> time.time()  <span class="co"># Record the start time</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> func(<span class="op">*</span>args, <span class="op">**</span>kwargs)  <span class="co"># Call the original function</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>        end_time <span class="op">=</span> time.time()  <span class="co"># Record the end time</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        execution_time <span class="op">=</span> end_time <span class="op">-</span> start_time  <span class="co"># Calculate execution time</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>func<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss"> executed in </span><span class="sc">{</span>execution_time<span class="sc">:.4f}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage with the decorator</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="at">@log_execution_time</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_expensive_computation(n):</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Example expensive operation: calculate the sum of squares up to n</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n))</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Now calling the decorated function will display its execution time</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> my_expensive_computation(<span class="dv">1000000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>my_expensive_computation executed in 0.0401 seconds</code></pre>
+</div>
+</div>
+<section id="finding-square-root" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="finding-square-root"><span class="header-section-number">4.5.1</span> Finding Square Root</h3>
+<p>The square-root of a number <span class="math inline">\(S\)</span> can be computed by iteration as follows:</p>
+<div id="8fe27e81" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> square_root(n, iterations<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> n</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (x <span class="op">+</span> n <span class="op">/</span> x)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Square root of"</span>, n, <span class="st">":"</span>, square_root(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Square root of 500 : 22.360679774997898</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="classes" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="classes"><span class="header-section-number">4.6</span> Classes</h2>
+<p>Python is an object oriented programming language. Everything in Python is an object.</p>
+<ul>
+<li><p>A class in Python defines the structure and behavior of an object. It’s like a blueprint from which individual objects are created.</p></li>
+<li><p>Each object created from a class is known as an instance of that class.</p></li>
+<li><p>A class encapsulates, or bundles together, data and the functions that operate on that data.</p></li>
+<li><p>The data in a class is held in attributes, which are variables that belong to the class.</p></li>
+<li><p>The functions inside a class are called methods. They define the behavior of the class and can manipulate the class attributes or perform operations relevant to the class.</p></li>
+<li><p>In Python, you define a class using the <code>class</code> keyword, followed by the class name and a colon. For example:</p></li>
+</ul>
+<div id="5a5775d8" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Experiment:</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Once a class is defined, you can create objects (instances) from it. For the <code>Experiment</code> class, creating an instance would look like this:</li>
+</ul>
+<div id="c90e287e" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>my_experiment <span class="op">=</span> Experiment()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Attributes and Methods:
+<ul>
+<li>Attributes can be added to a class to store information about the state of an instance. For example, a <code>Experiment</code> class might have attributes like <code>name</code> and <code>type</code>.</li>
+<li>Methods are functions defined within a class and are used to define the behaviors of an instance. For instance, an <code>Experiment</code> class might have methods like <code>analyse</code> or <code>visualize</code>.</li>
+<li>Class attributes and methods are crucial to Python classes, with attributes being shared variables among all instances, and methods as functions that act on these attributes to define object behaviors. Class attributes, set within the class but outside methods, are accessible by both the class and its instances, ideal for constants or default values shared by all instances. In contrast, instance attributes, defined within the <code>__init__</code> method, are specific to each object, allowing for customization. Methods, needing at least one parameter (<code>self</code>), manipulate both class and instance attributes, highlighting the class design’s flexibility to accommodate shared and unique object data. This distinction enables both commonality through class attributes and individuality via instance attributes, with methods facilitating interactions and behaviors across this framework.</li>
+</ul></li>
+</ul>
+<section id="inheritance-in-python" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="inheritance-in-python"><span class="header-section-number">4.6.1</span> Inheritance in Python</h3>
+<p>Inheritance is a fundamental concept in object-oriented programming (OOP). It allows us to define a class that inherits all the methods and properties from another class.</p>
+<ul>
+<li><p>Inheritance enables new classes, known as subclasses, to receive and extend the properties and methods of existing classes, known as parent or base classes.</p></li>
+<li><p>It’s used to create a new class with little or no modification to an existing class. The new class can add new methods and properties or modify existing ones.</p></li>
+<li><p>Creating a Subclass: In Python, you create a subclass by simply declaring a new class and putting the name of the parent class in parentheses.</p></li>
+</ul>
+<div id="7e595767" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseClass:</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SubClass(BaseClass):</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Inheriting Features: The subclass inherits all methods and properties from the parent class.</p></li>
+<li><p>Python supports multiple inheritance, where a subclass can inherit from multiple parent classes.</p></li>
+<li><p>Method Resolution Order (MRO): In the case of multiple inheritance, Python uses a specific order (MRO) to look up methods. This order is defined in a tuple called <code>__mro__</code> in the class.</p></li>
+<li><p>If you want to change the behavior of a method in your subclass that is defined in its parent class, you simply redefine it. This is known as method overriding.</p></li>
+</ul>
+<div id="0b2a032f" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseClass:</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_message(<span class="va">self</span>):</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>       <span class="bu">print</span>(<span class="st">"This is a message from the Base Class"</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SubClass(BaseClass):</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_message(<span class="va">self</span>):</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>       <span class="bu">print</span>(<span class="st">"This is a message from the Sub Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Sometimes you want to extend rather than entirely replace a parent class method. You can do this using <code>super()</code> to call the parent class method.</li>
+</ul>
+<div id="9e6d93b7" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SubClass(BaseClass):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_message(<span class="va">self</span>):</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().print_message()</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"This is an additional message from the Sub Class"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="61e4cf35" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> SubClass()</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>test.print_message()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This is a message from the Base Class
+This is an additional message from the Sub Class</code></pre>
+</div>
+</div>
+</section>
+<section id="class-decorators" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="class-decorators"><span class="header-section-number">4.6.2</span> Class Decorators</h3>
+<p><code>@staticmethod</code> is used to declare a method within a class as a static method, which means it doesn’t require a reference to a class or instance.</p>
+<div id="53d767a9" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass:</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">@staticmethod</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> my_static_method():</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"This is a static method"</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>MyClass.my_static_method()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This is a static method</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 85%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decorator</th>
+<th>Meaning</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@classmethod</code></td>
+<td>Converts a method into a class method, which means it receives the class as the first argument instead of an instance. It can access class attributes but not instance attributes.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>@staticmethod</code></td>
+<td>Converts a method into a static method, which does not receive an implicit first argument (neither self nor cls). It’s a way to namespace functions in a class.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>@property</code></td>
+<td>Converts a method into a property, allowing you to access it as an attribute instead of calling it as a method. Useful for defining getters.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>@&lt;property&gt;.setter</code></td>
+<td>Used in conjunction with <code>@property</code> to define the setter method for a property, allowing you to set the value of a property.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>@&lt;property&gt;.deleter</code></td>
+<td>Used alongside <code>@property</code> to define the deleter method of a property, enabling you to delete a property.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>@functools.wraps</code></td>
+<td>Used in decorator definitions to preserve the wrapped function’s metadata, such as its name and docstring.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>@functools.lru_cache</code></td>
+<td>Caches the results of a function, storing the result of expensive function calls and using the cached value when the same inputs occur again.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>@functools.singledispatch</code></td>
+<td>Transforms a function into a single-dispatch generic function, allowing it to have different behaviors based upon the type of the first argument.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="double-underscore-methods" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="double-underscore-methods"><span class="header-section-number">4.6.3</span> __ Double Underscore methods</h3>
+<p>Magic methods in Python, also known as dunder (double underscore) methods, are special methods with fixed names that Python calls in certain circumstances. They allow us to define how instances of a class behave under different operations like when they’re printed, added together, or have their length checked.</p>
+<section id="the-__init__-method" class="level4" data-number="4.6.3.1">
+<h4 data-number="4.6.3.1" class="anchored" data-anchor-id="the-__init__-method"><span class="header-section-number">4.6.3.1</span> The <code>__init__</code> Method</h4>
+<p>The <code>__init__</code> method in Python is a special method used for initializing new objects of a class. It’s often referred to as a constructor in other programming languages. Here’s a brief description:</p>
+<ul>
+<li><p>The <code>__init__</code> method is automatically invoked when a new instance of a class is created. Its primary role is to assign values to the object’s properties or perform any other necessary initialization.</p></li>
+<li><p>It is defined within a class, and its first parameter is always <code>self</code>, which represents the instance of the class. Additional parameters can be added to pass data to initialize the object.</p></li>
+<li><p>Example:</p></li>
+</ul>
+<div id="6a147736" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Experiment:</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, date):</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name  <span class="co"># instance attribute</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.date <span class="op">=</span> date  <span class="co"># instance attribute</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an instance </span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>my_Experiment <span class="op">=</span> Experiment(<span class="st">'Temperature_flux'</span>, <span class="st">'5/March/2050'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example, when <code>Experiment('Temperature_flux', '5/March/2050')</code> is executed, the <code>__init__</code> method is called with <code>self</code> being the newly created object and <code>name</code>, <code>date</code> being ‘Temperature_flux’, 5/March/2050 respectively.</p>
+<ul>
+<li><p>While <code>__init__</code> is commonly used, it’s not mandatory. If not defined, Python provides a default <code>__init__</code> that does nothing.</p></li>
+<li><p>The <code>__init__</code> method cannot return anything other than <code>None</code>. Its purpose is purely initialization.</p></li>
+</ul>
+<p>Here’s an overview of some common magic methods:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 78%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dunder Method</th>
+<th>Meaning</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>init</strong>(self, …)</td>
+<td>Constructor method for initializing a new instance of a class.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>del</strong>(self)</td>
+<td>Called when an instance is about to be destroyed. Useful for cleanup operations.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>repr</strong>(self)</td>
+<td>Called by the repr() built-in function and by string conversions to produce a string representation of an object for debugging.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>str</strong>(self)</td>
+<td>Called by the str() function and by the print statement to produce a more user-friendly string representation of an object.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>call</strong>(self, …)</td>
+<td>Allows an instance of a class to be called as a function.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>getattr</strong>(self, name)</td>
+<td>Called when an attribute lookup has not found the attribute in the usual places.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>setattr</strong>(self, name, value)</td>
+<td>Called when an attribute assignment is attempted.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>delattr</strong>(self, name)</td>
+<td>Called when an attribute deletion is attempted.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>lt</strong>(self, other)</td>
+<td>Defines behavior for the less than operator &lt;.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>le</strong>(self, other)</td>
+<td>Defines behavior for the less than or equal to operator &lt;=.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>eq</strong>(self, other)</td>
+<td>Defines behavior for the equality operator ==.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>ne</strong>(self, other)</td>
+<td>Defines behavior for the inequality operator !=.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>gt</strong>(self, other)</td>
+<td>Defines behavior for the greater than operator &gt;.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>ge</strong>(self, other)</td>
+<td>Defines behavior for the greater than or equal to operator &gt;=.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>add</strong>(self, other)</td>
+<td>Defines behavior for the addition operator +.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>sub</strong>(self, other)</td>
+<td>Defines behavior for the subtraction operator -.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>mul</strong>(self, other)</td>
+<td>Defines behavior for the multiplication operator *.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>truediv</strong>(self, other)</td>
+<td>Defines behavior for the division operator /.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>floordiv</strong>(self, other)</td>
+<td>Defines behavior for the floor division operator //.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>mod</strong>(self, other)</td>
+<td>Defines behavior for the modulus operator %.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>pow</strong>(self, other)</td>
+<td>Defines behavior for the exponent operator **.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>getitem</strong>(self, key)</td>
+<td>Called to retrieve an item from the object for the given key (like in a dictionary or list).</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>setitem</strong>(self, key, value)</td>
+<td>Called to set an item on the object for the given key.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>delitem</strong>(self, key)</td>
+<td>Called to delete an item from the object for the given key.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>iter</strong>(self)</td>
+<td>Should return an iterator for the object.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>next</strong>(self)</td>
+<td>Called to produce the next value in a sequence during iteration.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="encapsulation" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="encapsulation"><span class="header-section-number">4.6.4</span> Encapsulation</h3>
+<p>In Python, private and protected members are used to enforce encapsulation, a fundamental concept in object-oriented programming. Encapsulation refers to the bundling of data with the methods that operate on that data, and restricting direct access to some of the object’s components. This concept is not enforced by the language itself but by a convention respected among programmers. Here’s how private and protected members work in Python:</p>
+<ul>
+<li>Indicated by a double underscore <code>__</code> prefix (e.g., <code>__privateAttribute</code>).</li>
+<li>Not actually private; it’s a convention to treat them as non-public parts of the API.</li>
+<li>Python performs name mangling: any identifier with two leading underscores is textually replaced with <code>_classname__identifier</code>, making it harder (but not impossible) to access from outside the class.</li>
+</ul>
+<div id="4d663d2d" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyClass:</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__privateAttribute <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __privateMethod(<span class="va">self</span>):</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"This is a private method"</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>obj <span class="op">=</span> MyClass()</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="co">#obj.__privateAttribute  # This will raise an AttributeError</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="a-functioning-program" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="a-functioning-program"><span class="header-section-number">4.7</span> A functioning program:</h2>
+<div id="3dd4cb26" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6fc7bee4" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Experiment:</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    university <span class="op">=</span> <span class="st">'TUM'</span>  <span class="co"># Class attribute</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name):</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">        A constructor initialized with name!</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.measurements <span class="op">=</span> []</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.location <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.person <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cost <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update_measurements(<span class="va">self</span>, data):</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="co">        this function updates the measurements !</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'data updated !'</span>)</span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span>  datetime.datetime.now()</span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.measurements.append([data, current_time.strftime(<span class="st">"</span><span class="sc">%c</span><span class="st">"</span>)])</span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update_location(<span class="va">self</span>, location_name):</span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a><span class="co">        this function updates the location</span></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.location <span class="op">=</span> location_name </span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> cost_in_dollars(<span class="va">self</span>, currency_exchange_rate):</span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.cost <span class="op">*</span> currency_exchange_rate </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Having implemented the class <code>Experiment</code>, we can start constructing objects of the type <code>Experiment</code>. This objects can be manipulated / updated using the functions defined int he class!</p>
+<div id="ac708af8" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="op">=</span> Experiment(<span class="st">'XVBjhjN1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bbb6249f" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>e1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>&lt;__main__.Experiment at 0x16b6f0690&gt;</code></pre>
+</div>
+</div>
+<div id="38dbf36e" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e1.person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>None</code></pre>
+</div>
+</div>
+<div id="9cc022d6" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>e2 <span class="op">=</span> Experiment(<span class="st">'new_exp'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9316d237" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>e2.update_location(<span class="st">'Arcisstr 21'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now let us update the location of the object <code>e1</code></p>
+<div id="ccbf4686" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>e1.update_location(<span class="st">'Pasing'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="18b0bf30" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e2.location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Arcisstr 21</code></pre>
+</div>
+</div>
+<p>In case we have measurements, then we can put these measurements in an array and then insert this array into the object using the update_measurements function.</p>
+<div id="70869937" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="4cff70f1" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>e1.update_measurements(new_data)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e1.measurements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>data updated !
+[[[1, 2, 4, 8], 'Sat Jul  6 23:39:38 2024']]</code></pre>
+</div>
+</div>
+<div id="213d88fd" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>e1.update_measurements([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>data updated !</code></pre>
+</div>
+</div>
+<div id="71af0490" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e1.measurements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[[1, 2, 4, 8], 'Sat Jul  6 23:39:38 2024'], [[4, 5, 6, 7], 'Sat Jul  6 23:39:38 2024']]</code></pre>
+</div>
+</div>
+<div id="f7496255" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e1.location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Pasing</code></pre>
+</div>
+</div>
+<div id="9caa73bd" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e2.location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Arcisstr 21</code></pre>
+</div>
+</div>
+<p>Common pitfalls:</p>
+<ol type="1">
+<li>Overuse of classes: It’s important to use classes judiciously, as overusing them can lead to code that is difficult to understand and maintain. If a simpler approach is sufficient, it’s often better to use functions or modules instead of classes.</li>
+<li>Inconsistent naming conventions: It’s important to follow consistent naming conventions when defining classes and their attributes and methods. This can help to improve code readability and maintainability.</li>
+<li>Tight coupling: Classes can become tightly coupled, which means that changes to one class can have unintended consequences on other parts of the code. It’s important to design classes with loose coupling in mind, which means that they should be independent and not rely too much on other classes.</li>
+<li>Poor design: Poorly designed classes can be difficult to use and maintain. It’s important to design classes with a clear purpose and a well-defined public interface. Additionally, classes should be tested thoroughly to ensure that they work as intended.</li>
+</ol>
+<p>Benefits:</p>
+<ol type="1">
+<li>Object-oriented programming: Python is an object-oriented programming (OOP) language, and classes are the building blocks of OOP. Classes allow you to define objects with their own attributes and methods, which makes it easier to organize and structure your code.</li>
+<li>Code reusability: With classes, you can create objects that can be reused in different parts of your code, which can save time and effort.</li>
+<li>Inheritance: Classes in Python support inheritance, which means that you can create a new class by inheriting from an existing class. This can save time and effort, as you can reuse the existing code and only modify or add what is necessary.</li>
+<li>Encapsulation: Classes allow you to encapsulate data and methods, which means that you can hide implementation details and only expose a public interface. This can help to reduce complexity and improve code maintainability.</li>
+</ol>
+</section>
+<section id="a-program-in-three-paradigms" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="a-program-in-three-paradigms"><span class="header-section-number">4.8</span> A Program in three Paradigms</h2>
+<p>A simple program that calculates the factorial of a number using three different programming paradigms: procedural, object-oriented, and functional programming.</p>
+<div id="a1cc768d" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Procedural Programming:</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial_procedural(n):</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>        result <span class="op">*=</span> i</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Factorial (Procedural): </span><span class="sc">{</span>factorial_procedural(num)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Factorial (Procedural): 15511210043330985984000000</code></pre>
+</div>
+</div>
+<div id="9410c736" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Object-Oriented Programming:</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FactorialCalculator:</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n):</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n <span class="op">=</span> n</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate(<span class="va">self</span>):</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="va">self</span>.n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>            result <span class="op">*=</span> i</span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>calculator <span class="op">=</span> FactorialCalculator(num)</span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Factorial (Object-Oriented): </span><span class="sc">{</span>calculator<span class="sc">.</span>calculate()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Factorial (Object-Oriented): 15511210043330985984000000</code></pre>
+</div>
+</div>
+<div id="98ce41ac" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functional Programming:</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial_functional(n):</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x, y: x <span class="op">*</span> y, <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>), <span class="dv">1</span>)</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Factorial (Functional): </span><span class="sc">{</span>factorial_functional(num)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Factorial (Functional): 15511210043330985984000000</code></pre>
+</div>
+</div>
+<p>These programs all calculate the factorial of a number entered by the user, but they do so using different programming paradigms. The procedural version uses a loop, the object-oriented version encapsulates the functionality in a class, and the functional version uses the <code>reduce</code> function to calculate the factorial.</p>
+</section>
+<section id="exercises" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.9</span> Exercises</h2>
+<section id="theory" class="level3" data-number="4.9.1">
+<h3 data-number="4.9.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">4.9.1</span> Theory</h3>
+<ol type="1">
+<li>What is the difference between a function and a method in Python?</li>
+<li>What is the purpose of the “self” parameter in a class method?</li>
+<li>What is the difference between the “map” and “filter” functions in Python?</li>
+<li>What is the purpose of the “reduce” function in Python?</li>
+<li>What is a lambda function, and how is it different from a regular function?</li>
+</ol>
+</section>
+<section id="coding" class="level3" data-number="4.9.2">
+<h3 data-number="4.9.2" class="anchored" data-anchor-id="coding"><span class="header-section-number">4.9.2</span> Coding</h3>
+<ol start="6" type="1">
+<li>Write a Python function that takes a list of integers as input and returns the sum of all the even numbers in the list.</li>
+<li>Write a Python class that represents a rectangle, with methods for calculating its area and perimeter.</li>
+<li>Use the “map” function to create a new list that contains the squares of all the numbers in an existing list.</li>
+<li>Use the “filter” function to create a new list that contains only the numbers smaller than 4 from a list that also has numbers larger than 4.</li>
+<li>Use the “reduce” function to calculate the cumulative differences of all the numbers in an existing list.</li>
+</ol>
+</section>
+</section>
+<section id="further-reading" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">4.10</span> Further Reading</h2>
+<ol type="1">
+<li><a href="https://docs.python.org/3/tutorial/classes.html" class="uri">https://docs.python.org/3/tutorial/classes.html</a></li>
+<li><a href="https://docs.python.org/3/howto/functional.html?highlight=lambda" class="uri">https://docs.python.org/3/howto/functional.html?highlight=lambda</a></li>
+<li><a href="https://rszalski.github.io/magicmethods/" class="uri">https://rszalski.github.io/magicmethods/</a></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_control_structures.html" class="pagination-link" aria-label="Control Structures">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Control Structures</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_numerical_computing_using_numpy.html" class="pagination-link" aria-label="Numerical Computing using NumPy">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Numerical Computing using NumPy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2024, Jithender Timothy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

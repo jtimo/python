@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Representing Data – Python for Engineers and Scientists (v1.0)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03_control_structures.html" rel="next">
+<link href="./01_introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/book_cover.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Python for Engineers and Scientists (v1.0)</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_representing_data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Representing Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_representing_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Representing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_control_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Control Structures</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_writing_programs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing Programs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_numerical_computing_using_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Numerical Computing using NumPy</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_data_analysis_using_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data processing using Pandas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_visualization_using_matplotlib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_scientific_computing_using_scipy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Scientific Python</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_machine_learning_using_scikitlearn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Scikit-Learn for Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">About</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link active" data-scroll-target="#data-types">Data Types</a></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures">Data Structures</a></li>
+  <li><a href="#data-and-variables" id="toc-data-and-variables" class="nav-link" data-scroll-target="#data-and-variables"><span class="header-section-number">2.1</span> Data and Variables</a></li>
+  <li><a href="#data-types-and-data-structures" id="toc-data-types-and-data-structures" class="nav-link" data-scroll-target="#data-types-and-data-structures"><span class="header-section-number">2.2</span> Data Types and Data Structures</a>
+  <ul class="collapse">
+  <li><a href="#numeric" id="toc-numeric" class="nav-link" data-scroll-target="#numeric"><span class="header-section-number">2.2.1</span> Numeric</a></li>
+  <li><a href="#boolean" id="toc-boolean" class="nav-link" data-scroll-target="#boolean"><span class="header-section-number">2.2.2</span> Boolean</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings"><span class="header-section-number">2.2.3</span> Strings</a></li>
+  <li><a href="#list-tuples" id="toc-list-tuples" class="nav-link" data-scroll-target="#list-tuples"><span class="header-section-number">2.2.4</span> List, Tuples</a></li>
+  <li><a href="#dictionary" id="toc-dictionary" class="nav-link" data-scroll-target="#dictionary"><span class="header-section-number">2.2.5</span> Dictionary</a></li>
+  <li><a href="#set" id="toc-set" class="nav-link" data-scroll-target="#set"><span class="header-section-number">2.2.6</span> Set</a></li>
+  </ul></li>
+  <li><a href="#input-and-output" id="toc-input-and-output" class="nav-link" data-scroll-target="#input-and-output"><span class="header-section-number">2.3</span> Input and Output</a></li>
+  <li><a href="#saving-data" id="toc-saving-data" class="nav-link" data-scroll-target="#saving-data"><span class="header-section-number">2.4</span> Saving data</a></li>
+  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">2.5</span> Help</a></li>
+  <li><a href="#worked-example-1-climate-change-indicators" id="toc-worked-example-1-climate-change-indicators" class="nav-link" data-scroll-target="#worked-example-1-climate-change-indicators"><span class="header-section-number">2.6</span> Worked Example 1: Climate Change Indicators</a></li>
+  <li><a href="#worked-example-2-creating-an-environmental-monitoring-database" id="toc-worked-example-2-creating-an-environmental-monitoring-database" class="nav-link" data-scroll-target="#worked-example-2-creating-an-environmental-monitoring-database"><span class="header-section-number">2.7</span> Worked Example 2: Creating an Environmental Monitoring Database</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.8</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">2.8.1</span> Theory</a></li>
+  <li><a href="#coding" id="toc-coding" class="nav-link" data-scroll-target="#coding"><span class="header-section-number">2.8.2</span> Coding</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">2.9</span> Further Reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Representing Data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the digital age, data is the essence of scientific discovery and engineering innovation. From the tiniest subatomic particles to the vast expanse of the cosmos, the ability to represent and manipulate data effectively is crucial. But how do we translate the complexities of the physical world into a form that a computer can understand and process?</p>
+<p>Imagine you are an engineer working on a project to design a new material with unique properties. To achieve this, you need to model the material’s behavior under various conditions. This requires handling a vast array of data points, from atomic structures to stress-strain curves. Or consider a scientist analyzing the genomic sequences of thousands of organisms to understand evolutionary patterns. The sheer volume and variety of data involved can be overwhelming.</p>
+<p>In Python, the key to managing this data lies in its diverse and powerful data types and structures. These tools allow us to represent everything from simple numerical values to complex relationships and patterns, making it possible to perform sophisticated analyses and simulations. Python’s flexibility and readability make it an ideal language for engineers and scientists who need to focus on solving problems rather than wrestling with syntax.</p>
+<div id="cell-history_plot_GB" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.cm <span class="im">as</span> cm</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LogNorm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Data for plotting</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> np.array([</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2000.25</span>, <span class="fl">2000.33</span>, <span class="fl">2000.42</span>, <span class="fl">2000.50</span>, <span class="fl">2000.58</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2000.67</span>, <span class="fl">2000.75</span>, <span class="fl">2000.83</span>, <span class="fl">2000.92</span>, <span class="fl">2001.00</span>, <span class="fl">2001.08</span>, <span class="fl">2001.17</span>, <span class="fl">2001.25</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2001.33</span>, <span class="fl">2001.42</span>, <span class="fl">2001.50</span>, <span class="fl">2001.50</span>, <span class="fl">2001.58</span>, <span class="fl">2001.67</span>, <span class="fl">2001.75</span>, <span class="fl">2001.77</span>, </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2002.08</span>, <span class="fl">2002.08</span>, <span class="fl">2002.25</span>, <span class="fl">2002.33</span>, <span class="fl">2002.42</span>, <span class="fl">2002.58</span>, <span class="fl">2002.75</span>, <span class="fl">2003.17</span>, </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2003.25</span>, <span class="fl">2003.58</span>, <span class="fl">2003.67</span>, <span class="fl">2003.75</span>, <span class="fl">2003.83</span>, <span class="fl">2003.99</span>, <span class="fl">2004.00</span>, <span class="fl">2004.08</span>, </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2004.17</span>, <span class="fl">2004.33</span>, <span class="fl">2004.42</span>, <span class="fl">2004.50</span>, <span class="fl">2005.25</span>, <span class="fl">2005.42</span>, <span class="fl">2005.83</span>, <span class="fl">2005.92</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2006.17</span>, <span class="fl">2006.33</span>, <span class="fl">2006.50</span>, <span class="fl">2006.67</span>, <span class="fl">2006.75</span>, <span class="fl">2006.83</span>, <span class="fl">2006.99</span>, <span class="fl">2007.00</span>, </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2007.08</span>, <span class="fl">2007.17</span>, <span class="fl">2007.33</span>, <span class="fl">2007.50</span>, <span class="fl">2007.67</span>, <span class="fl">2007.75</span>, <span class="fl">2007.83</span>, <span class="fl">2007.92</span>, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2008.00</span>, <span class="fl">2008.08</span>, <span class="fl">2008.33</span>, <span class="fl">2008.50</span>, <span class="fl">2008.58</span>, <span class="fl">2008.67</span>, <span class="fl">2008.83</span>, <span class="fl">2008.92</span>, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2009.00</span>, <span class="fl">2009.08</span>, <span class="fl">2009.25</span>, <span class="fl">2009.42</span>, <span class="fl">2009.50</span>, <span class="fl">2009.58</span>, <span class="fl">2009.75</span>, <span class="fl">2009.92</span>, </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2010.00</span>, <span class="fl">2010.08</span>, <span class="fl">2010.17</span>, <span class="fl">2010.33</span>, <span class="fl">2010.50</span>, <span class="fl">2010.58</span>, <span class="fl">2010.75</span>, <span class="fl">2010.83</span>, </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2010.92</span>, <span class="fl">2011.00</span>, <span class="fl">2011.08</span>, <span class="fl">2011.33</span>, <span class="fl">2011.42</span>, <span class="fl">2011.67</span>, <span class="fl">2011.75</span>, <span class="fl">2012.00</span>, </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2012.08</span>, <span class="fl">2012.25</span>, <span class="fl">2012.33</span>, <span class="fl">2012.58</span>, <span class="fl">2012.67</span>, <span class="fl">2012.83</span>, <span class="fl">2013.00</span>, <span class="fl">2013.08</span>, </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2013.33</span>, <span class="fl">2013.42</span>, <span class="fl">2013.58</span>, <span class="fl">2013.67</span>, <span class="fl">2013.75</span>, <span class="fl">2013.83</span>, <span class="fl">2013.92</span>, <span class="fl">2014.08</span>, </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2014.17</span>, <span class="fl">2014.25</span>, <span class="fl">2014.42</span>, <span class="fl">2014.58</span>, <span class="fl">2014.67</span>, <span class="fl">2014.83</span>, <span class="fl">2015.00</span>, <span class="fl">2015.08</span>, </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2015.25</span>, <span class="fl">2015.33</span>, <span class="fl">2015.50</span>, <span class="fl">2015.58</span>, <span class="fl">2015.67</span>, <span class="fl">2015.75</span>, <span class="fl">2015.83</span>, <span class="fl">2015.92</span>, </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2016.08</span>, <span class="fl">2016.25</span>, <span class="fl">2016.33</span>, <span class="fl">2016.42</span>, <span class="fl">2016.50</span>, <span class="fl">2016.58</span>, <span class="fl">2016.75</span>, <span class="fl">2016.83</span>, </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2016.92</span>, <span class="fl">2017.00</span>, <span class="fl">2017.17</span>, <span class="fl">2017.33</span>, <span class="fl">2017.42</span>, <span class="fl">2017.50</span>, <span class="fl">2017.67</span>, <span class="fl">2017.75</span>, </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2017.92</span>, <span class="fl">2018.08</span>, <span class="fl">2018.17</span>, <span class="fl">2018.33</span>, <span class="fl">2018.42</span>, <span class="fl">2018.50</span>, <span class="fl">2018.58</span>, <span class="fl">2018.67</span>, </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2018.83</span>, <span class="fl">2018.92</span>, <span class="fl">2019.00</span>, <span class="fl">2019.08</span>, <span class="fl">2019.17</span>, <span class="fl">2019.25</span>, <span class="fl">2019.33</span>, <span class="fl">2019.42</span>, </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2019.50</span>, <span class="fl">2019.58</span>, <span class="fl">2019.67</span>, <span class="fl">2019.75</span>, <span class="fl">2019.83</span>, <span class="fl">2019.92</span>, <span class="fl">2020.00</span>, <span class="fl">2020.08</span>, </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2020.17</span>, <span class="fl">2020.25</span>, <span class="fl">2020.33</span>, <span class="fl">2020.42</span>, <span class="fl">2020.50</span>, <span class="fl">2020.58</span>, <span class="fl">2020.67</span>, <span class="fl">2020.75</span>, </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2020.83</span>, <span class="fl">2020.92</span>, <span class="fl">2021.08</span>, <span class="fl">2021.25</span>, <span class="fl">2021.33</span>, <span class="fl">2021.50</span>, <span class="fl">2021.58</span>, <span class="fl">2021.67</span>, </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2021.75</span>, <span class="fl">2021.92</span>, <span class="fl">2022.00</span>, <span class="fl">2022.08</span>, <span class="fl">2022.17</span>, <span class="fl">2022.25</span>, <span class="fl">2022.33</span>, <span class="fl">2022.42</span>, </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2022.58</span>, <span class="fl">2022.67</span>, <span class="fl">2022.75</span>, <span class="fl">2022.83</span>, <span class="fl">2022.92</span>, <span class="fl">2023.00</span>, <span class="fl">2023.08</span>, <span class="fl">2023.17</span>, </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2023.33</span>, <span class="fl">2023.42</span>, <span class="fl">2023.50</span>, <span class="fl">2023.67</span>, <span class="fl">2023.75</span>, <span class="fl">2023.83</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>prices_per_gb <span class="op">=</span> np.array([</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.56</span>, <span class="fl">1.48</span>, <span class="fl">1.08</span>, <span class="fl">0.84</span>, <span class="fl">0.70</span>, <span class="fl">0.90</span>, <span class="fl">0.77</span>, <span class="fl">0.84</span>, </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.07</span>, <span class="fl">1.12</span>, <span class="fl">1.12</span>, <span class="fl">0.90</span>, <span class="fl">0.75</span>, <span class="fl">0.46</span>, <span class="fl">0.46</span>, <span class="fl">0.38</span>, </span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.39</span>, <span class="fl">0.30</span>, <span class="fl">0.35</span>, <span class="fl">0.27</span>, <span class="fl">0.19</span>, <span class="fl">0.19</span>, <span class="fl">0.17</span>, <span class="fl">0.15</span>, </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.13</span>, <span class="fl">0.21</span>, <span class="fl">0.19</span>, <span class="fl">0.193</span>, <span class="fl">0.330</span>, <span class="fl">0.193</span>, <span class="fl">0.193</span>, <span class="fl">0.176</span>, </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.076</span>, <span class="fl">0.129</span>, <span class="fl">0.143</span>, <span class="fl">0.148</span>, <span class="fl">0.160</span>, <span class="fl">0.166</span>, <span class="fl">0.174</span>, <span class="fl">0.148</span>, </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.146</span>, <span class="fl">0.156</span>, <span class="fl">0.203</span>, <span class="fl">0.176</span>, <span class="fl">0.185</span>, <span class="fl">0.149</span>, <span class="fl">0.116</span>, <span class="fl">0.185</span>, </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.112</span>, <span class="fl">0.073</span>, <span class="fl">0.082</span>, <span class="fl">0.073</span>, <span class="fl">0.088</span>, <span class="fl">0.093</span>, <span class="fl">0.092</span>, <span class="fl">0.082</span>, </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.078</span>, <span class="fl">0.066</span>, <span class="fl">0.046</span>, <span class="fl">0.039</span>, <span class="fl">0.035</span>, <span class="fl">0.032</span>, <span class="fl">0.024</span>, <span class="fl">0.024</span>, </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.023</span>, <span class="fl">0.022</span>, <span class="fl">0.022</span>, <span class="fl">0.021</span>, <span class="fl">0.018</span>, <span class="fl">0.015</span>, <span class="fl">0.011</span>, <span class="fl">0.010</span>, </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0107</span>, <span class="fl">0.0105</span>, <span class="fl">0.0115</span>, <span class="fl">0.0110</span>, <span class="fl">0.0127</span>, <span class="fl">0.0183</span>, <span class="fl">0.0205</span>, </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0190</span>, <span class="fl">0.0202</span>, <span class="fl">0.0195</span>, <span class="fl">0.0242</span>, <span class="fl">0.0210</span>, <span class="fl">0.0220</span>, <span class="fl">0.0171</span>, </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0146</span>, <span class="fl">0.0122</span>, <span class="fl">0.0100</span>, <span class="fl">0.0103</span>, <span class="fl">0.0100</span>, <span class="fl">0.0085</span>, <span class="fl">0.0054</span>, </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0051</span>, <span class="fl">0.0049</span>, <span class="fl">0.0049</span>, <span class="fl">0.0050</span>, <span class="fl">0.0049</span>, <span class="fl">0.0048</span>, <span class="fl">0.0040</span>, </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0037</span>, <span class="fl">0.0043</span>, <span class="fl">0.0054</span>, <span class="fl">0.0067</span>, <span class="fl">0.0061</span>, <span class="fl">0.0073</span>, <span class="fl">0.0065</span>, </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0082</span>, <span class="fl">0.0085</span>, <span class="fl">0.0079</span>, <span class="fl">0.0095</span>, <span class="fl">0.0079</span>, <span class="fl">0.0073</span>, <span class="fl">0.0079</span>, </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0085</span>, <span class="fl">0.0085</span>, <span class="fl">0.0085</span>, <span class="fl">0.0078</span>, <span class="fl">0.0073</span>, <span class="fl">0.0061</span>, <span class="fl">0.0056</span>, </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0049</span>, <span class="fl">0.0045</span>, <span class="fl">0.0043</span>, <span class="fl">0.0042</span>, <span class="fl">0.0038</span>, <span class="fl">0.0037</span>, <span class="fl">0.0036</span>,</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0031</span>, <span class="fl">0.0030</span>, <span class="fl">0.0027</span>, <span class="fl">0.0031</span>, <span class="fl">0.0035</span>, <span class="fl">0.0035</span>, <span class="fl">0.0041</span>,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0046</span>, <span class="fl">0.0049</span>, <span class="fl">0.0055</span>, <span class="fl">0.0057</span>, <span class="fl">0.0055</span>, <span class="fl">0.0059</span>, <span class="fl">0.0061</span>,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0067</span>, <span class="fl">0.0071</span>, <span class="fl">0.0067</span>, <span class="fl">0.0070</span>, <span class="fl">0.0068</span>, <span class="fl">0.0064</span>, <span class="fl">0.0068</span>,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0062</span>, <span class="fl">0.0055</span>, <span class="fl">0.0051</span>, <span class="fl">0.0046</span>, <span class="fl">0.0043</span>, <span class="fl">0.0043</span>, <span class="fl">0.0042</span>,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0037</span>, <span class="fl">0.0034</span>, <span class="fl">0.0032</span>, <span class="fl">0.0027</span>, <span class="fl">0.0027</span>, <span class="fl">0.0033</span>, <span class="fl">0.0031</span>,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0029</span>, <span class="fl">0.0028</span>, <span class="fl">0.0029</span>, <span class="fl">0.0031</span>, <span class="fl">0.0035</span>, <span class="fl">0.0035</span>, <span class="fl">0.0032</span>,</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0027</span>, <span class="fl">0.0028</span>, <span class="fl">0.0027</span>, <span class="fl">0.0029</span>, <span class="fl">0.0030</span>, <span class="fl">0.0034</span>, <span class="fl">0.0040</span>,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0035</span>, <span class="fl">0.0039</span>, <span class="fl">0.0037</span>, <span class="fl">0.0032</span>, <span class="fl">0.0030</span>, <span class="fl">0.0026</span>, <span class="fl">0.0028</span>,</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0029</span>, <span class="fl">0.0031</span>, <span class="fl">0.0031</span>, <span class="fl">0.0027</span>, <span class="fl">0.0026</span>, <span class="fl">0.0023</span>, <span class="fl">0.0022</span>,</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0022</span>, <span class="fl">0.0021</span>, <span class="fl">0.0021</span>, <span class="fl">0.0020</span>, <span class="fl">0.0018</span>, <span class="fl">0.0018</span>, <span class="fl">0.0015</span>,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.00143</span>, <span class="fl">0.00140</span>, <span class="fl">0.00142</span>, <span class="fl">0.00137</span>, <span class="fl">0.00128</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize the data for colormap</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> LogNorm(prices_per_gb.<span class="bu">min</span>(), prices_per_gb.<span class="bu">max</span>())</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> cm.Spectral</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">5</span>))</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with color mapping</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(years)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    ax.plot(years[i:i<span class="op">+</span><span class="dv">2</span>], prices_per_gb[i:i<span class="op">+</span><span class="dv">2</span>], color<span class="op">=</span>cmap(norm(prices_per_gb[i])), marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">6</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and grid</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Year'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Price per GB (USD)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'both'</span>, linestyle<span class="op">=</span><span class="st">'-.'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>ax.set_yscale(<span class="st">'log'</span>)  <span class="co"># Set log scale for better visualization</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Colorbar</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(cmap<span class="op">=</span>cmap, norm<span class="op">=</span>norm)</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>sm.set_array([])</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>fig.colorbar(sm, ax<span class="op">=</span>ax, orientation<span class="op">=</span><span class="st">'vertical'</span>, label<span class="op">=</span><span class="st">'Price per GB (USD)'</span>)</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">#https://jcmit.net/memoryprice.htm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<figcaption>Cost per GB of memory</figcaption>
+<p><a href="02_representing_data_files/figure-html/history_plot_gb-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Cost per GB of memory"><img src="02_representing_data_files/figure-html/history_plot_gb-output-1.png" width="853" height="432" alt="Cost per GB of memory" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Python data types refer to the different kinds of data that can be used in a Python program, such as numbers, strings, and boolean values. Python data structures, on the other hand, are objects that can hold multiple values, such as lists, tuples, and dictionaries.</p>
+<p>Historically, the concept of data types and data structures has been important in computer science because it helps programmers organize and manipulate data in an efficient and meaningful way. By using the appropriate data type or data structure for a given task, programmers can optimize their code and improve its performance.</p>
+<p>Here are some of the most common Python data types and data structures:</p>
+<section id="data-types" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="data-types">Data Types</h3>
+<ul>
+<li><p><strong>Numbers:</strong> There are several different types of numbers in Python, including integers, floats, and complex numbers. These can be used for calculations and other mathematical operations.</p></li>
+<li><p><strong>Strings:</strong> Strings are sequences of characters, and are used to represent text in Python. They can be manipulated using a variety of built-in string methods.</p></li>
+<li><p><strong>Booleans:</strong> Booleans are true/false values that are used for logical operations in Python.</p></li>
+<li><p><strong>NoneType:</strong> NoneType is a special type in Python that represents the absence of a value.</p></li>
+</ul>
+</section>
+<section id="data-structures" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="data-structures">Data Structures</h3>
+<ul>
+<li><strong>Lists:</strong> Lists are ordered collections of values, and can contain elements of different types. They can be modified by adding or removing elements.</li>
+<li><strong>Tuples:</strong> Tuples are similar to lists, but are immutable, meaning they cannot be modified once they are created.</li>
+<li><strong>Sets:</strong> Sets are unordered collections of unique elements. They can be used for tasks such as removing duplicates or testing membership.</li>
+<li><strong>Dictionaries:</strong> Dictionaries are key-value pairs, and can be used to store and retrieve data using a key.</li>
+</ul>
+<p>Understanding data types and data structures is an essential part of writing effective Python code. By using the appropriate data type or data structure for a given task, programmers can write more efficient and effective programs.</p>
+</section>
+<section id="data-and-variables" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-and-variables"><span class="header-section-number">2.1</span> Data and Variables</h2>
+<p>Data is the main ingredient in programming. This data is information. In general, a software program (also called code) involves processing data. Essentially, this data has to be input into the computer. Inside the computer, in a high-level programming language like Python, the data is given a name and this name is linked to the memory location of the data. <strong>These names can only contain alphanumeric characters (letters and numbers) and underscores. However, the first character of the name must be a letter or underscore. Spaces within a variable name are not permitted,</strong> and the variable names are case-sensitive (e.g., a and A will be considered different variables) !</p>
+<p>In the following example, assume we have a certain number of experimental specimens with a value of 10 ! Let us assign this data a name called n_specimens !</p>
+<div id="2b2f189c" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_specimens <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="186509bd" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n_specimens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>Now let us check if indeed the name n_specimens points to the data 10</p>
+<div id="5ec623d5" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n_specimens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>Now in case we have recieved information that the data has changed (e.g.&nbsp;miscommunication, failed specimens etc.), we do not have to create a new name. In case the number of specimens has increased by 5, then we can update this information as follows:</p>
+<div id="0eb82cc1" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n_specimens <span class="op">=</span> n_specimens <span class="op">+</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can check if the value has been updated !</p>
+<div id="d20c2997" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n_specimens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>15</code></pre>
+</div>
+</div>
+<p>As the data i.e information that the name ‘n_specimens’ represents can vary, this is called a variable ! Henceforth in programming, a variable ‘contains’ data. You can remove a variable from the notebook using the del function. Typing del n_specimens will clear the variable n_specimens from the workspace. If you want to remove all the variables in the notebook, you can use the magic command %reset. This is unique to Jupyter. In case you use Spyder or another IDE, these commands are not valid.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The mathematical equation x=x+1 has no solution for any value of x. In programming, if we initialize the value of x to be 1, then the statement makes perfect sense. It means, “Add x and 1, which is 2, then assign that value to the variable x”. Note that this operation overwrites the previous value stored in x.</p>
+</div>
+</div>
+<p>The Jupyter Notebook has its data list to store all the variables in the notebook. As a result of the previous example, you will see the variable ‘n_specimens’ in this data list. You can view a list of all the variables in the notebook using the magic command %whos.</p>
+<div id="d426b373" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variable        Type                       Data/Info
+----------------------------------------------------
+LogNorm         type                       &lt;class 'matplotlib.colors.LogNorm'&gt;
+ax              Axes                       Axes(0.125,0.11;0.62x0.77)
+cm              module                     &lt;module 'matplotlib.cm' f&lt;...&gt;ckages/matplotlib/cm.py'&gt;
+cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x118afa3d0&gt;
+fig             Figure                     Figure(1056x480)
+i               int                        201
+n_specimens     int                        15
+norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x1291996d0&gt;
+np              module                     &lt;module 'numpy' from '/Us&lt;...&gt;kages/numpy/__init__.py'&gt;
+ojs_define      function                   &lt;function ojs_define at 0x128d55760&gt;
+plt             module                     &lt;module 'matplotlib.pyplo&lt;...&gt;es/matplotlib/pyplot.py'&gt;
+prices_per_gb   ndarray                    203: 203 elems, type `float64`, 1624 bytes
+sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x12923c590&gt;
+years           ndarray                    203: 203 elems, type `float64`, 1624 bytes</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can overwrite variables or functions that have been stored in Python.</p>
+</div>
+</div>
+</section>
+<section id="data-types-and-data-structures" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-types-and-data-structures"><span class="header-section-number">2.2</span> Data Types and Data Structures</h2>
+<p>From a computational point of view, it would be efficient if the information regarding the type of data is also included in the variable. The reason this information is required is because the data that the variable contains can vary. Hence this variable should be able to accomodate the possible variations. For example, an integer variable requires lesser memory than a real number. Hence, including this information is essential for storing and processing data. In python, the data type is automatically specified during variable creation. The basic data types are boolean, int, float, string, list, tuple, dictionary, set.</p>
+<p>Let us create an integer and a real number !</p>
+<div id="d5dd7192" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>an_integer <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>a_real_number <span class="op">=</span> <span class="fl">1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fcdac9d1" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variable        Type                       Data/Info
+----------------------------------------------------
+LogNorm         type                       &lt;class 'matplotlib.colors.LogNorm'&gt;
+a_real_number   float                      1.0
+an_integer      int                        1
+ax              Axes                       Axes(0.125,0.11;0.62x0.77)
+cm              module                     &lt;module 'matplotlib.cm' f&lt;...&gt;ckages/matplotlib/cm.py'&gt;
+cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x118afa3d0&gt;
+fig             Figure                     Figure(1056x480)
+i               int                        201
+n_specimens     int                        15
+norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x1291996d0&gt;
+np              module                     &lt;module 'numpy' from '/Us&lt;...&gt;kages/numpy/__init__.py'&gt;
+ojs_define      function                   &lt;function ojs_define at 0x128d55760&gt;
+plt             module                     &lt;module 'matplotlib.pyplo&lt;...&gt;es/matplotlib/pyplot.py'&gt;
+prices_per_gb   ndarray                    203: 203 elems, type `float64`, 1624 bytes
+sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x12923c590&gt;
+years           ndarray                    203: 203 elems, type `float64`, 1624 bytes</code></pre>
+</div>
+</div>
+<p>As you can see, the type of a_real_number is float. Float is a type of data that can include decimal values. Given a variable, the type can be extracted using the function <code>type()</code>.</p>
+<div id="3b992de6" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(an_integer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>int</code></pre>
+</div>
+</div>
+<section id="numeric" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="numeric"><span class="header-section-number">2.2.1</span> Numeric</h3>
+<p>There are three numeric data types: <strong>integers, floating point numbers, and complex numbers.</strong> Information about the precision and internal representation of floating point numbers for the machine on which your program is running is available in <a href="https://docs.python.org/3/library/sys.html#sys.float_info">sys.float_info</a>. Complex numbers have a real and imaginary part, which are each a floating point number. To extract these parts from a complex number z, use z.real and z.imag.</p>
+<p>To Summarize:</p>
+<ol type="1">
+<li>int - holds signed integers.</li>
+<li>float- holds floating precision numbers and it’s accurate up to 15 decimal places.</li>
+<li>complex - holds complex numbers (with float representations of the real and imaginary part).</li>
+</ol>
+<p>The constructors <code>int()</code>, <code>float()</code>, and <code>complex()</code> can be used to produce numbers of a specific type.</p>
+<div id="242dcf46" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sys.float_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=308, min=2.2250738585072014e-308, min_exp=-1021, min_10_exp=-307, dig=15, mant_dig=53, epsilon=2.220446049250313e-16, radix=2, rounds=1)</code></pre>
+</div>
+</div>
+<p>Because we are limited by the resolution of the maschine to represent data, we are limited to what we can represent. In the above output from python, epsilon refers to the smallest resolution of the machine. This means that a value <span class="math inline">\(\delta = a-b &lt; epsilon / 2\)</span> cannot be represented.</p>
+<p>We can test this using the following code !</p>
+<div id="2e0646cb" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="57b8ce3d" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">*</span><span class="dv">10</span><span class="op">**-</span><span class="dv">16</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="99794825" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.7</span><span class="op">*</span><span class="fl">2.220446049250313</span><span class="op">*</span><span class="dv">10</span><span class="op">**-</span><span class="dv">16</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>False</code></pre>
+</div>
+</div>
+<p>All numeric types support the following operations:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 81%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x + y</td>
+<td>sum of x and y</td>
+</tr>
+<tr class="even">
+<td>x - y</td>
+<td>difference of x and y</td>
+</tr>
+<tr class="odd">
+<td>x * y</td>
+<td>product of x and y</td>
+</tr>
+<tr class="even">
+<td>x / y</td>
+<td>quotient of x and y</td>
+</tr>
+<tr class="odd">
+<td>x // y</td>
+<td>floored quotient of x and y</td>
+</tr>
+<tr class="even">
+<td>x % y</td>
+<td>remainder of x / y</td>
+</tr>
+<tr class="odd">
+<td>-x</td>
+<td>x negated</td>
+</tr>
+<tr class="even">
+<td>+x</td>
+<td>x unchanged</td>
+</tr>
+<tr class="odd">
+<td>abs(x)</td>
+<td>absolute value or magnitude of x</td>
+</tr>
+<tr class="even">
+<td>int(x)</td>
+<td>x converted to integer</td>
+</tr>
+<tr class="odd">
+<td>float(x)</td>
+<td>x converted to floating point</td>
+</tr>
+<tr class="even">
+<td>complex(re, im)</td>
+<td>a complex number with real part re, imaginary part im. im defaults to zero.</td>
+</tr>
+<tr class="odd">
+<td>c.conjugate()</td>
+<td>conjugate of the complex number c</td>
+</tr>
+<tr class="even">
+<td>divmod(x, y)</td>
+<td>the pair (x // y, x % y)</td>
+</tr>
+<tr class="odd">
+<td>pow(x, y)</td>
+<td>x to the power y</td>
+</tr>
+<tr class="even">
+<td>x ** y</td>
+<td>x to the power y</td>
+</tr>
+</tbody>
+</table>
+<p>Please note that the complex type does not support % and // operations !</p>
+</section>
+<section id="boolean" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="boolean"><span class="header-section-number">2.2.2</span> Boolean</h3>
+<p>One of the key components of programming is the use of testing the truth value of certain operations. The data type used to represent this is the bool data type. Boolean variable can either be True or False. Numeric data types can be converted to boolean data type using the <code>bool()</code> function. Except the value 0, all other numerical values would give True.</p>
+<div id="ff566ab8" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>start_experiment <span class="op">=</span> <span class="va">True</span> <span class="co"># initializing a boolean variable</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>specimen_indicator <span class="op">=</span> <span class="bu">bool</span>(n_specimens) <span class="co"># converting numeric to boolean type</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>specimen_indicator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="8a0788b3" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(specimen_indicator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="ef83a7e7" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The keywords True and False must have an Upper Case first letter. Using a lowercase true returns an error.</p>
+</div>
+</div>
+<p>Boolean arithmetic is the arithmetic of true and false logic. A boolean or logical value can either be True or False. Boolean operators in Python include and, or, and not.</p>
+<p>The boolean operators in Python are given below:</p>
+<ol type="1">
+<li>or</li>
+<li>and</li>
+<li>not</li>
+<li>== (equivalent)</li>
+<li>!= (not equivalent)</li>
+</ol>
+<p>Given two boolean variables a and b, the following results are obtained for the aformentioned boolean logic !</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>a</th>
+<th>b</th>
+<th>not a</th>
+<th>not b</th>
+<th>a == b</th>
+<th>a != b</th>
+<th>a or b</th>
+<th>a and b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+<p>Try it out: Test the boolean arithmetic for yourself.</p>
+</section>
+<section id="strings" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="strings"><span class="header-section-number">2.2.3</span> Strings</h3>
+<p>An important data type for representing textual data, especially when processing files etc. is the string data type. Strings can be sequences of letters, numbers, symbols, and spaces. In Python, strings can be almost any length and can also contain spaces. Strings are immutable, which means that you cannot change their characters. To create a string in Python, you can use single quotes (’’), double quotes (““) or triple quotes (”““).</p>
+<div id="392e3e14" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">'database_xmcv_21.csv'</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>database_xmcv_21.csv</code></pre>
+</div>
+</div>
+<div id="51a91dfa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>str</code></pre>
+</div>
+</div>
+<p>One of the frequently used operation on strings is <strong>indexing</strong> and <strong>slicing</strong>. This is used to extract and manipulate string data.</p>
+<div id="2bf2ec1e" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">0</span>] <span class="co"># first symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>'d'</code></pre>
+</div>
+</div>
+<div id="a372e085" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">1</span>] <span class="co"># second symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>'a'</code></pre>
+</div>
+</div>
+<div id="3b1be691" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="op">-</span><span class="dv">2</span>] <span class="co"># last symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>'s'</code></pre>
+</div>
+</div>
+<div id="d2b5b7c3" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">0</span>:<span class="dv">16</span>:<span class="dv">3</span>] <span class="co"># [start:stop:step]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>'dasxv1'</code></pre>
+</div>
+</div>
+<div id="1476464b" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>filename[::<span class="op">-</span><span class="dv">1</span>] <span class="co"># reverse text</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>'vsc.12_vcmx_esabatad'</code></pre>
+</div>
+</div>
+<div id="7f6c8eda" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>filename.center(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>'                                        database_xmcv_21.csv                                        '</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>capitalize()</td>
+<td>Converts the first character to upper case</td>
+</tr>
+<tr class="even">
+<td>casefold()</td>
+<td>Converts string into lower case</td>
+</tr>
+<tr class="odd">
+<td>center()</td>
+<td>Returns a centered string</td>
+</tr>
+<tr class="even">
+<td>count()</td>
+<td>Returns the number of times a specified value occurs in a string</td>
+</tr>
+<tr class="odd">
+<td>encode()</td>
+<td>Returns an encoded version of the string</td>
+</tr>
+<tr class="even">
+<td>endswith()</td>
+<td>Returns true if the string ends with the specified value</td>
+</tr>
+<tr class="odd">
+<td>expandtabs()</td>
+<td>Sets the tab size of the string</td>
+</tr>
+<tr class="even">
+<td>find()</td>
+<td>Searches the string for a specified value and returns the position of where it was found</td>
+</tr>
+<tr class="odd">
+<td>format()</td>
+<td>Formats specified values in a string</td>
+</tr>
+<tr class="even">
+<td>format_map()</td>
+<td>Formats specified values in a string</td>
+</tr>
+<tr class="odd">
+<td>index()</td>
+<td>Searches the string for a specified value and returns the position of where it was found</td>
+</tr>
+<tr class="even">
+<td>isalnum()</td>
+<td>Returns True if all characters in the string are alphanumeric</td>
+</tr>
+<tr class="odd">
+<td>isalpha()</td>
+<td>Returns True if all characters in the string are in the alphabet</td>
+</tr>
+<tr class="even">
+<td>isascii()</td>
+<td>Returns True if all characters in the string are ascii characters</td>
+</tr>
+<tr class="odd">
+<td>isdecimal()</td>
+<td>Returns True if all characters in the string are decimals</td>
+</tr>
+<tr class="even">
+<td>isdigit()</td>
+<td>Returns True if all characters in the string are digits</td>
+</tr>
+<tr class="odd">
+<td>isidentifier()</td>
+<td>Returns True if the string is an identifier</td>
+</tr>
+<tr class="even">
+<td>islower()</td>
+<td>Returns True if all characters in the string are lower case</td>
+</tr>
+<tr class="odd">
+<td>isnumeric()</td>
+<td>Returns True if all characters in the string are numeric</td>
+</tr>
+<tr class="even">
+<td>isprintable()</td>
+<td>Returns True if all characters in the string are printable</td>
+</tr>
+<tr class="odd">
+<td>isspace()</td>
+<td>Returns True if all characters in the string are whitespaces</td>
+</tr>
+<tr class="even">
+<td>istitle()</td>
+<td>Returns True if the string follows the rules of a title</td>
+</tr>
+<tr class="odd">
+<td>isupper()</td>
+<td>Returns True if all characters in the string are upper case</td>
+</tr>
+<tr class="even">
+<td>join()</td>
+<td>Converts the elements of an iterable into a string</td>
+</tr>
+<tr class="odd">
+<td>ljust()</td>
+<td>Returns a left justified version of the string</td>
+</tr>
+<tr class="even">
+<td>lower()</td>
+<td>Converts a string into lower case</td>
+</tr>
+<tr class="odd">
+<td>lstrip()</td>
+<td>Returns a left trim version of the string</td>
+</tr>
+<tr class="even">
+<td>maketrans()</td>
+<td>Returns a translation table to be used in translations</td>
+</tr>
+<tr class="odd">
+<td>partition()</td>
+<td>Returns a tuple where the string is parted into three parts</td>
+</tr>
+<tr class="even">
+<td>replace()</td>
+<td>Returns a string where a specified value is replaced with a specified value</td>
+</tr>
+<tr class="odd">
+<td>rfind()</td>
+<td>Searches the string for a specified value and returns the last position of where it was found</td>
+</tr>
+<tr class="even">
+<td>rindex()</td>
+<td>Searches the string for a specified value and returns the last position of where it was found</td>
+</tr>
+<tr class="odd">
+<td>rjust()</td>
+<td>Returns a right justified version of the string</td>
+</tr>
+<tr class="even">
+<td>rpartition()</td>
+<td>Returns a tuple where the string is parted into three parts</td>
+</tr>
+<tr class="odd">
+<td>rsplit()</td>
+<td>Splits the string at the specified separator, and returns a list</td>
+</tr>
+<tr class="even">
+<td>rstrip()</td>
+<td>Returns a right trim version of the string</td>
+</tr>
+<tr class="odd">
+<td>split()</td>
+<td>Splits the string at the specified separator, and returns a list</td>
+</tr>
+<tr class="even">
+<td>splitlines()</td>
+<td>Splits the string at line breaks and returns a list</td>
+</tr>
+<tr class="odd">
+<td>startswith()</td>
+<td>Returns true if the string starts with the specified value</td>
+</tr>
+<tr class="even">
+<td>strip()</td>
+<td>Returns a trimmed version of the string</td>
+</tr>
+<tr class="odd">
+<td>swapcase()</td>
+<td>Swaps cases, lower case becomes upper case and vice versa</td>
+</tr>
+<tr class="even">
+<td>title()</td>
+<td>Converts the first character of each word to upper case</td>
+</tr>
+<tr class="odd">
+<td>translate()</td>
+<td>Returns a translated string</td>
+</tr>
+<tr class="even">
+<td>upper()</td>
+<td>Converts a string into upper case</td>
+</tr>
+<tr class="odd">
+<td>zfill()</td>
+<td>Fills the string with a specified number of 0 values at the beginning</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="list-tuples" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="list-tuples"><span class="header-section-number">2.2.4</span> List, Tuples</h3>
+<p>A list is an ordered collection of items. Lists are mutable, which means that their elements can be added, removed, or modified. To create a list in Python, you can use square brackets [] and separate the elements by commas. The contents of the list can be any of the aformentioned elementary data type.</p>
+<div id="445731df" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far <span class="op">=</span> [<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="va">True</span>, filename]</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>[1, 1.5, True, 'database_xmcv_21.csv']</code></pre>
+</div>
+</div>
+<div id="c0e78839" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>'database_xmcv_21.csv'</code></pre>
+</div>
+</div>
+<div id="2ff5bbe3" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>] <span class="op">=</span> <span class="st">'database_xcmm_45.csv'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="24799628" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>'database_xcmm_45.csv'</code></pre>
+</div>
+</div>
+<div id="e450bf7b" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data_discussed_so_far) <span class="co"># get the type</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>list</code></pre>
+</div>
+</div>
+<div id="6263a076" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>'database_xcmm_45.csv'</code></pre>
+</div>
+</div>
+<div id="5cd16406" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">1</span>:<span class="dv">3</span>:<span class="dv">1</span>] <span class="co"># start stop step</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>[1.5, True]</code></pre>
+</div>
+</div>
+<div id="401392b6" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">2</span>:<span class="dv">4</span>] <span class="co">#start, stop, location of final item + 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>[True, 'database_xcmm_45.csv']</code></pre>
+</div>
+</div>
+<p>The colon operator denotes start : end + 1. data_discussed_so_far[2:4]returns the 2nd element, and 3rd element but not the fourth even though 3 is used in the index.</p>
+<div id="97b37a4c" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far.append(<span class="st">'database_vbnmx_25.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="8538fddb" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>[1, 1.5, True, 'database_xcmm_45.csv', 'database_vbnmx_25.csv']</code></pre>
+</div>
+</div>
+<p>A tuple is similar to a list, but it is immutable. Once a tuple is created, you cannot change its elements. To create a tuple in Python, you can use parentheses () and separate the elements by commas.</p>
+<div id="b39fc4b9" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>my_numbers <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(my_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code>tuple</code></pre>
+</div>
+</div>
+<div id="a6058e05" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>my_numbers[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>4</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>List Methods</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>append()</td>
+<td>Adds an element at the end of the list</td>
+</tr>
+<tr class="even">
+<td>clear()</td>
+<td>Removes all the elements from the list</td>
+</tr>
+<tr class="odd">
+<td>copy()</td>
+<td>Returns a copy of the list</td>
+</tr>
+<tr class="even">
+<td>count()</td>
+<td>Returns the number of elements with the specified value</td>
+</tr>
+<tr class="odd">
+<td>extend()</td>
+<td>Add the elements of a list (or any iterable), to the end of the current list</td>
+</tr>
+<tr class="even">
+<td>index()</td>
+<td>Returns the index of the first element with the specified value</td>
+</tr>
+<tr class="odd">
+<td>insert()</td>
+<td>Adds an element at the specified position</td>
+</tr>
+<tr class="even">
+<td>pop()</td>
+<td>Removes the element at the specified position</td>
+</tr>
+<tr class="odd">
+<td>remove()</td>
+<td>Removes the first item with the specified value</td>
+</tr>
+<tr class="even">
+<td>reverse()</td>
+<td>Reverses the order of the list</td>
+</tr>
+<tr class="odd">
+<td>sort()</td>
+<td>Sorts the list</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Tuple Methods</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>count()</td>
+<td>Returns the number of times a specified value occurs in a tuple</td>
+</tr>
+<tr class="even">
+<td>index()</td>
+<td>Searches the tuple for a specified value and returns the position of where it was found</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dictionary" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="dictionary"><span class="header-section-number">2.2.5</span> Dictionary</h3>
+<p>Dictionaries as the name suggests is similar to the classical definition of a dictionary. Given a ‘key’ piece of information, like a word, the detailed meaning of this word can be obtained. Similarly, we can organise data in the form of key:value pairs. A dictionary data type in python is a collection of key-value pairs. Each key in a dictionary must be unique, and the values can be of any data type. To create a dictionary in Python, you can use curly braces {} and separate the key-value pairs by colons (:).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Python, lists and tuples are organized and accessed based on position. Dictionaries in Python are organized and accessed using keys and values. The location of a pair of keys and values stored in a Python dictionary is irrelevant.</p>
+</div>
+</div>
+<p>Keys can be a string, number or even tuple (but not a list). In contrast to the list where data is indexed by integer values denoting thier position in the list, the dictionary can be indexed using the keys. Dictionaries can be used to organize data and avoid errors while indexing and extracting information.</p>
+<div id="9f568c9d" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="op">=</span> {<span class="st">'viscosity'</span>:[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="st">'stiffness'</span>:<span class="dv">5</span>} <span class="co"># create a dictionary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9ae519fb" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>material_properties</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>{'viscosity': [2, 2, 3, 4], 'stiffness': 5}</code></pre>
+</div>
+</div>
+<div id="4f98802d" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>material_properties[<span class="st">'density'</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># Add new item into the dictionary through initialization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0f522b5d" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="co"># look at the dictionary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>{'viscosity': [2, 2, 3, 4], 'stiffness': 5, 'density': 1}</code></pre>
+</div>
+</div>
+<div id="4b03d486" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>material_properties[<span class="st">'viscosity'</span>][<span class="op">-</span><span class="dv">1</span>] <span class="co"># extract the value of the key 'density'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>4</code></pre>
+</div>
+</div>
+<div id="caaa5bd9" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(material_properties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>dict</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>clear()</td>
+<td>Removes all the elements from the dictionary</td>
+</tr>
+<tr class="even">
+<td>copy()</td>
+<td>Returns a copy of the dictionary</td>
+</tr>
+<tr class="odd">
+<td>fromkeys()</td>
+<td>Returns a dictionary with the specified keys and value</td>
+</tr>
+<tr class="even">
+<td>get()</td>
+<td>Returns the value of the specified key</td>
+</tr>
+<tr class="odd">
+<td>items()</td>
+<td>Returns a list containing a tuple for each key value pair</td>
+</tr>
+<tr class="even">
+<td>keys()</td>
+<td>Returns a list containing the dictionary’s keys</td>
+</tr>
+<tr class="odd">
+<td>pop()</td>
+<td>Removes the element with the specified key</td>
+</tr>
+<tr class="even">
+<td>popitem()</td>
+<td>Removes the last inserted key-value pair</td>
+</tr>
+<tr class="odd">
+<td>setdefault()</td>
+<td>Returns the value of the specified key. If the key does not exist: insert the key, with the specified value</td>
+</tr>
+<tr class="even">
+<td>update()</td>
+<td>Updates the dictionary with the specified key-value pairs</td>
+</tr>
+<tr class="odd">
+<td>values()</td>
+<td>Returns a list of all the values in the dictionary</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="set" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="set"><span class="header-section-number">2.2.6</span> Set</h3>
+<p>A set is an unordered collection of unique elements. Sets are mutable, which means that you can add or remove elements from them. To create a set in Python, you can use curly braces {} or the <code>set()</code> function. Set theoretical rules like union, intersection and difference can be applied on this data type. It is specified by comma-seperated data in curly braces. The command <code>set()</code> creates a set.</p>
+<div id="d9b40c04" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>my_integers <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>}</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(my_integers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<pre><code>set</code></pre>
+</div>
+</div>
+<p>The following methods are defined for sets !</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Method</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>add()</td>
+<td>Adds an element to the set</td>
+</tr>
+<tr class="even">
+<td>clear()</td>
+<td>Removes all the elements from the set</td>
+</tr>
+<tr class="odd">
+<td>copy()</td>
+<td>Returns a copy of the set</td>
+</tr>
+<tr class="even">
+<td>difference()</td>
+<td>Returns a set containing the difference between two or more sets</td>
+</tr>
+<tr class="odd">
+<td>difference_update()</td>
+<td>Removes the items in this set that are also included in another, specified set</td>
+</tr>
+<tr class="even">
+<td>discard()</td>
+<td>Remove the specified item</td>
+</tr>
+<tr class="odd">
+<td>intersection()</td>
+<td>Returns a set, that is the intersection of two or more sets</td>
+</tr>
+<tr class="even">
+<td>intersection_update()</td>
+<td>Removes the items in this set that are not present in other, specified set(s)</td>
+</tr>
+<tr class="odd">
+<td>isdisjoint()</td>
+<td>Returns whether two sets have a intersection or not</td>
+</tr>
+<tr class="even">
+<td>issubset()</td>
+<td>Returns whether another set contains this set or not</td>
+</tr>
+<tr class="odd">
+<td>issuperset()</td>
+<td>Returns whether this set contains another set or not</td>
+</tr>
+<tr class="even">
+<td>pop()</td>
+<td>Removes an element from the set</td>
+</tr>
+<tr class="odd">
+<td>remove()</td>
+<td>Removes the specified element</td>
+</tr>
+<tr class="even">
+<td>symmetric_difference()</td>
+<td>Returns a set with the symmetric differences of two sets</td>
+</tr>
+<tr class="odd">
+<td>symmetric_difference_update()</td>
+<td>inserts the symmetric differences from this set and another</td>
+</tr>
+<tr class="even">
+<td>union()</td>
+<td>Return a set containing the union of sets</td>
+</tr>
+<tr class="odd">
+<td>update()</td>
+<td>Update the set with another set, or any other iterable</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="input-and-output" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="input-and-output"><span class="header-section-number">2.3</span> Input and Output</h2>
+<p>In Python, you can get input from the user through the console using the <code>input()</code> function. This function takes a string argument, which is used as a prompt to ask the user for input.</p>
+</section>
+<section id="saving-data" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="saving-data"><span class="header-section-number">2.4</span> Saving data</h2>
+<p>The pickle module in Python is used for serializing and deserializing Python objects. Serialization is the process of converting an object into a byte stream, and deserialization is the process of converting a byte stream back into an object.</p>
+<p>Here are some basic steps for using the pickle module in Python:</p>
+<div id="3891c15c" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e86f92f4" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="op">=</span> {<span class="st">'Density [kg/m^3]'</span>: <span class="dv">1000</span>, <span class="st">'viscosity [Pa s]'</span>: <span class="dv">25</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="74f863a0" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>material_properties</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>{'Density [kg/m^3]': 1000, 'viscosity [Pa s]': 25}</code></pre>
+</div>
+</div>
+<div id="8aa73cf6" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'my_material_properties.pkl'</span>, <span class="st">'wb'</span>) <span class="im">as</span> my_file:</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    pickle.dump(material_properties, my_file) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="96bdf2d4" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'my_material_properties.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> my_file:</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    material_properties_imported <span class="op">=</span> pickle.load(my_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9fa200cf" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>material_properties_imported</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>{'Density [kg/m^3]': 1000, 'viscosity [Pa s]': 25}</code></pre>
+</div>
+</div>
+<p>Note that the pickle module can be used to serialize and deserialize any Python object, including lists, tuples, sets, and custom objects. However, it is important to note that the pickle module can be unsafe if you are unpickling data from an untrusted source, as it can execute arbitrary code.</p>
+<p>The second argument in the <code>open()</code> function determines the mode in which the file will be opened. In particular, it specifies whether the file should be opened for reading or writing, and whether it should be opened in text mode or binary mode. Here’s a summary of the different modes that can be specified:</p>
+<ul>
+<li><code>r</code> (default): Open the file for reading in text mode.</li>
+<li><code>w</code>: Open the file for writing in text mode. If the file already exists, it will be truncated (i.e., emptied).</li>
+<li><code>x</code>: Open the file for exclusive creation in text mode. If the file already exists, the operation will fail.</li>
+<li><code>a</code>: Open the file for writing in text mode. If the file already exists, new data will be appended to it.</li>
+<li><code>b</code>: Open the file in binary mode, regardless of whether it is being opened for reading or writing. This mode should be used for non-text files, such as images, audio, or serialized data.</li>
+<li><code>t</code>: Open the file in text mode, regardless of whether it is being opened for reading or writing. This is the default mode.</li>
+<li><code>+</code>: Open the file for updating (i.e., both reading and writing).</li>
+</ul>
+<p>Combining these modes allows you to specify more complex options. For example, if you want to open a binary file for reading and writing, you would use ‘rb+’ or <code>wb+</code>. Similarly, if you want to open a text file for appending, you would use ‘at’.</p>
+<p>In the context of the pickle module, you would typically use ‘wb’ to open a file for writing in binary mode, and ‘rb’ to open a file for reading in binary mode. This is because pickle serializes Python objects into a binary format, which is not compatible with text mode. The reason why it’s called serialization and not just copying is because serialization involves more than just making a copy of an object. When we serialize an object, we’re actually taking all of its data (like its properties, values, and attributes) and converting it into a format that can be easily saved or transmitted.</p>
+<p>This format is typically a sequence of bytes, which is a series of numbers that represent the object’s data in binary code. This sequence of bytes is what gets saved or transmitted, rather than the original object itself. So serialization is more than just copying an object - it’s actually a process of transforming an object’s data into a format that can be saved or transmitted. And deserialization is the process of transforming that saved or transmitted data back into an object with all of its original properties and attributes.</p>
+</section>
+<section id="help" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="help"><span class="header-section-number">2.5</span> Help</h2>
+<p>Applying the function <code>help</code> on any python object, the details of the object can be retrieved.</p>
+<div id="45843fc8" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(<span class="bu">print</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on built-in function print in module builtins:
+
+print(*args, sep=' ', end='\n', file=None, flush=False)
+    Prints the values to a stream, or to sys.stdout by default.
+    
+    sep
+      string inserted between values, default a space.
+    end
+      string appended after the last value, default a newline.
+    file
+      a file-like object (stream); defaults to the current sys.stdout.
+    flush
+      whether to forcibly flush the stream.
+</code></pre>
+</div>
+</div>
+</section>
+<section id="worked-example-1-climate-change-indicators" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="worked-example-1-climate-change-indicators"><span class="header-section-number">2.6</span> Worked Example 1: Climate Change Indicators</h2>
+<p>Let’s consider a scenario related to climate change, focusing on data points that are commonly discussed in environmental studies: average global temperature change (float), carbon dioxide (CO2) emissions (int, measured in gigatons), and a boolean indicating whether renewable energy usage is increasing year-over-year.</p>
+<p>From these inputs, we aim to derive properties that can provide insights into the progress towards mitigating climate change. These could include:</p>
+<ol type="1">
+<li><strong>Temperature Anomaly Risk</strong> (boolean): Indicates if the change in average global temperature is beyond a certain threshold, suggesting a high risk to global climates.</li>
+<li><strong>Emissions Trend</strong> (boolean): Determines if CO2 emissions are within a target reduction path.</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 8%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>average_temperature_change (°C)</td>
+<td>float</td>
+<td>input</td>
+</tr>
+<tr class="even">
+<td>co2_emissions (Gt)</td>
+<td>int</td>
+<td>input</td>
+</tr>
+<tr class="odd">
+<td>renewable_energy_increasing (-)</td>
+<td>bool</td>
+<td>input</td>
+</tr>
+<tr class="even">
+<td>temperature_risk_threshold (°C)</td>
+<td>float</td>
+<td>1.5</td>
+</tr>
+<tr class="odd">
+<td>target_co2_emissions (Gt)</td>
+<td>bool</td>
+<td>35</td>
+</tr>
+<tr class="even">
+<td>temperature_anomaly_risk</td>
+<td>bool</td>
+<td>average_temperature_change &gt; temperature_risk_threshold</td>
+</tr>
+<tr class="odd">
+<td>emissions_trend</td>
+<td>bool</td>
+<td>co2_emissions &lt; target_co2_emissions</td>
+</tr>
+</tbody>
+</table>
+<div id="b4a5c159" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input data</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>average_temperature_change <span class="op">=</span> <span class="fl">1.2</span>  <span class="co"># Example change in degrees Celsius</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>co2_emissions <span class="op">=</span> <span class="dv">38</span>  <span class="co"># CO2 emissions in gigatons for the current year</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>renewable_energy_increasing <span class="op">=</span> <span class="va">True</span>  <span class="co"># Whether the use of renewable energy is increasing</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Constants for calculations</span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>temperature_risk_threshold <span class="op">=</span> <span class="fl">1.5</span>  <span class="co"># Degrees Celsius</span></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>target_co2_emissions <span class="op">=</span> <span class="dv">35</span>  <span class="co"># Target emissions in gigatons</span></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Deriving additional properties</span></span>
+<span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature Anomaly Risk (true if average_temperature_change exceeds threshold)</span></span>
+<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a>temperature_anomaly_risk <span class="op">=</span> average_temperature_change <span class="op">&gt;</span> temperature_risk_threshold</span>
+<span id="cb91-14"><a href="#cb91-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-15"><a href="#cb91-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Emissions Trend (true if emissions are below or equal to the target)</span></span>
+<span id="cb91-16"><a href="#cb91-16" aria-hidden="true" tabindex="-1"></a>emissions_trend <span class="op">=</span> co2_emissions <span class="op">&lt;=</span> target_co2_emissions</span>
+<span id="cb91-17"><a href="#cb91-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-18"><a href="#cb91-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the derived properties</span></span>
+<span id="cb91-19"><a href="#cb91-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temperature Anomaly Risk: </span><span class="sc">{</span>temperature_anomaly_risk<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb91-20"><a href="#cb91-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Emissions Trend: </span><span class="sc">{</span>emissions_trend<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Temperature Anomaly Risk: False
+Emissions Trend: False</code></pre>
+</div>
+</div>
+<p>This example synthesizes basic climate-related data into actionable insights. The <strong>Temperature Anomaly Risk</strong> signals when immediate action is needed to curb global warming. The <strong>Emissions Trend</strong> offers a quick check against set targets for CO2 emissions, indicating whether more aggressive measures are needed.</p>
+<p>Such calculations, though simplified here, are vital in real-world policy-making and environmental science, helping to monitor and guide efforts against climate change.</p>
+<hr>
+</section>
+<section id="worked-example-2-creating-an-environmental-monitoring-database" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="worked-example-2-creating-an-environmental-monitoring-database"><span class="header-section-number">2.7</span> Worked Example 2: Creating an Environmental Monitoring Database</h2>
+<p>Consider the environmental monitoring scenario. Using sensor data, we can derive additional properties that provide more nuanced insights into the environment. These insights can be critical for different applications, such as agricultural planning, public health advisories, and even automated home systems. Assuming the user provides the temperature, humidity and information if it is raining, a recommendation system can be setup that also logs the data.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 8%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>date and time</td>
+<td>str</td>
+<td>system</td>
+</tr>
+<tr class="even">
+<td>temperature (°C)</td>
+<td>int</td>
+<td>input</td>
+</tr>
+<tr class="odd">
+<td>humidity (%)</td>
+<td>int</td>
+<td>input</td>
+</tr>
+<tr class="even">
+<td>is_raining (-)</td>
+<td>bool</td>
+<td>input</td>
+</tr>
+<tr class="odd">
+<td>suitable_for_plant_growth (-)</td>
+<td>bool</td>
+<td>(18 &lt; temperature &lt; 25) &amp; humidity &gt; 50 &amp; ¬ is_raining</td>
+</tr>
+<tr class="even">
+<td>risk_of_equipment_damage (-)</td>
+<td>bool</td>
+<td>humidity &gt; 75</td>
+</tr>
+<tr class="odd">
+<td>additional_watering_needed (-)</td>
+<td>bool</td>
+<td>¬ is_raining &amp; humidity &lt; 65</td>
+</tr>
+<tr class="even">
+<td>frost warning (-)</td>
+<td>bool</td>
+<td>temperature &lt; 5 &amp; ¬ is_raining</td>
+</tr>
+<tr class="odd">
+<td>inspection needed (-)</td>
+<td>bool</td>
+<td>risk_of_equipment_damage</td>
+</tr>
+</tbody>
+</table>
+<div id="e32e8af9" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>environmental_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0df7e0cb" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> {}</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Given inputs remain the same</span></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>date <span class="op">=</span> dt.datetime.now()</span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'date and time'</span>] <span class="op">=</span> (date.strftime(<span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y, %H:%M:%S"</span>), date.weekday())</span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'temperature'</span>] <span class="op">=</span> <span class="bu">float</span>(<span class="st">'33'</span>)  </span>
+<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'humidity'</span>] <span class="op">=</span> <span class="bu">int</span>(<span class="st">'65'</span>)      </span>
+<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'is_raining'</span>] <span class="op">=</span> <span class="bu">bool</span>(<span class="st">'True'</span>) </span>
+<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Existing derived properties</span></span>
+<span id="cb94-15"><a href="#cb94-15" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'suitable_for_plant_growth'</span>] <span class="op">=</span> <span class="dv">18</span> <span class="op">&lt;</span> properties[<span class="st">'temperature'</span>] <span class="op">&lt;</span> <span class="dv">25</span> <span class="kw">and</span> properties[<span class="st">'humidity'</span>] <span class="op">&gt;</span> <span class="dv">50</span> <span class="kw">and</span> <span class="kw">not</span> properties[<span class="st">'is_raining'</span>]</span>
+<span id="cb94-16"><a href="#cb94-16" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'risk_of_equipment_damage'</span>] <span class="op">=</span> properties[<span class="st">'humidity'</span>] <span class="op">&gt;</span> <span class="dv">75</span></span>
+<span id="cb94-17"><a href="#cb94-17" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'additional_watering_needed'</span>] <span class="op">=</span> <span class="kw">not</span> properties[<span class="st">'is_raining'</span>] <span class="kw">and</span> properties[<span class="st">'humidity'</span>] <span class="op">&lt;</span> <span class="dv">65</span></span>
+<span id="cb94-18"><a href="#cb94-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-19"><a href="#cb94-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Frost Warning (assuming frost risk if temperature is close to 0°C and not raining)</span></span>
+<span id="cb94-20"><a href="#cb94-20" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'frost_warning'</span>] <span class="op">=</span> properties[<span class="st">'temperature'</span>] <span class="op">&lt;</span> <span class="dv">5</span> <span class="kw">and</span> <span class="kw">not</span> properties[<span class="st">'is_raining'</span>]</span>
+<span id="cb94-21"><a href="#cb94-21" aria-hidden="true" tabindex="-1"></a>properties[<span class="st">'inspection_needed'</span>] <span class="op">=</span> properties[<span class="st">'risk_of_equipment_damage'</span>] <span class="kw">or</span> properties[<span class="st">'frost_warning'</span>]</span>
+<span id="cb94-22"><a href="#cb94-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-23"><a href="#cb94-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the newly derived properties</span></span>
+<span id="cb94-24"><a href="#cb94-24" aria-hidden="true" tabindex="-1"></a>environmental_data.append(properties)</span>
+<span id="cb94-25"><a href="#cb94-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-26"><a href="#cb94-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the data point in a database</span></span>
+<span id="cb94-27"><a href="#cb94-27" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'environmental_state.dbs'</span>, <span class="st">'wb'</span>) <span class="im">as</span> my_file:</span>
+<span id="cb94-28"><a href="#cb94-28" aria-hidden="true" tabindex="-1"></a>    pickle.dump(environmental_data, my_file) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Import the database and view it !</p>
+<div id="d2073b87" class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'environmental_state.dbs'</span>, <span class="st">'rb'</span>) <span class="im">as</span> my_file:</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    my_data_that_is_imported <span class="op">=</span> pickle.load(my_file)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_data_that_is_imported)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[{'date and time': ('07/06/2024, 23:39:26', 5), 'temperature': 33.0, 'humidity': 65, 'is_raining': True, 'suitable_for_plant_growth': False, 'risk_of_equipment_damage': False, 'additional_watering_needed': False, 'frost_warning': False, 'inspection_needed': False}]</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="exercises" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.8</span> Exercises</h2>
+<section id="theory" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">2.8.1</span> Theory</h3>
+<ol type="1">
+<li>What is the difference between a list and a tuple in Python?</li>
+<li>What is the difference between an int and a float in Python?</li>
+<li>What is the purpose of type conversion in Python? Give an example.</li>
+<li>How do you declare a variable in Python, and what are the rules for naming variables?</li>
+<li>We have the average temperature data for each day of the week for one week. Which is the most suitable data structure to represent this data ?</li>
+</ol>
+</section>
+<section id="coding" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="coding"><span class="header-section-number">2.8.2</span> Coding</h3>
+<ol start="6" type="1">
+<li>Create a program that prompts the user to enter a sentence. Your program should convert the sentence to a list of words and then sort the list in alphabetical order. Finally, print the sorted list to the console.</li>
+<li>Get the largest number from a list of integers.</li>
+<li>Create a program that prompts the user to enter a string. Your program should then check if the string is a palindrome (i.e., it reads the same forward and backward). If the string is a palindrome, print “Palindrome” to the console. Otherwise, print “Not a palindrome” to the console.</li>
+</ol>
+</section>
+</section>
+<section id="further-reading" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">2.9</span> Further Reading</h2>
+<ol type="1">
+<li><a href="https://docs.python.org/3/tutorial/datastructures.html" class="uri">https://docs.python.org/3/tutorial/datastructures.html</a></li>
+<li><a href="https://docs.python.org/3/library/stdtypes.html#" class="uri">https://docs.python.org/3/library/stdtypes.html#</a></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01_introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03_control_structures.html" class="pagination-link" aria-label="Control Structures">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Control Structures</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2024, Jithender Timothy</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
