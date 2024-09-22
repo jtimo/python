@@ -445,28 +445,28 @@ window.Quarto = {
 <h2 data-number="2.1" class="anchored" data-anchor-id="data-and-variables"><span class="header-section-number">2.1</span> Data and Variables</h2>
 <p>Data is the main ingredient in programming. This data is information. In general, a software program (also called code) involves processing data. Essentially, this data has to be input into the computer. Inside the computer, in a high-level programming language like Python, the data is given a name and this name is linked to the memory location of the data. <strong>These names can only contain alphanumeric characters (letters and numbers) and underscores. However, the first character of the name must be a letter or underscore. Spaces within a variable name are not permitted,</strong> and the variable names are case-sensitive (e.g., a and A will be considered different variables) !</p>
 <p>In the following example, assume we have a certain number of experimental specimens with a value of 10 ! Let us assign this data a name called n_specimens !</p>
-<div id="ece938b0" class="cell" data-execution_count="2">
+<div id="2ebe006c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n_specimens <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b322d15e" class="cell" data-execution_count="3">
+<div id="18f5e243" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n_specimens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>10</code></pre>
 </div>
 </div>
 <p>Now let us check if indeed the name n_specimens points to the data 10</p>
-<div id="bb1a8148" class="cell" data-execution_count="4">
+<div id="a22a95b2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n_specimens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>10</code></pre>
 </div>
 </div>
 <p>Now in case we have recieved information that the data has changed (e.g.&nbsp;miscommunication, failed specimens etc.), we do not have to create a new name. In case the number of specimens has increased by 5, then we can update this information as follows:</p>
-<div id="3ff83e37" class="cell" data-execution_count="5">
+<div id="2150a04a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n_specimens <span class="op">=</span> n_specimens <span class="op">+</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can check if the value has been updated !</p>
-<div id="95961f0b" class="cell" data-execution_count="6">
+<div id="a9a11c63" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n_specimens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>15</code></pre>
@@ -487,7 +487,7 @@ Note
 </div>
 </div>
 <p>The Jupyter Notebook has its data list to store all the variables in the notebook. As a result of the previous example, you will see the variable ‘n_specimens’ in this data list. You can view a list of all the variables in the notebook using the magic command %whos.</p>
-<div id="211b8cdd" class="cell" data-execution_count="7">
+<div id="55cfcab6" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Variable        Type                       Data/Info
@@ -495,16 +495,16 @@ Note
 LogNorm         type                       &lt;class 'matplotlib.colors.LogNorm'&gt;
 ax              Axes                       Axes(0.125,0.11;0.62x0.77)
 cm              module                     &lt;module 'matplotlib.cm' f&lt;...&gt;ckages/matplotlib/cm.py'&gt;
-cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x117954210&gt;
+cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x11192dd10&gt;
 fig             Figure                     Figure(1056x480)
 i               int                        201
 n_specimens     int                        15
-norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x15e59d850&gt;
+norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x127ed9610&gt;
 np              module                     &lt;module 'numpy' from '/Us&lt;...&gt;kages/numpy/__init__.py'&gt;
-ojs_define      function                   &lt;function ojs_define at 0x1310c0040&gt;
+ojs_define      function                   &lt;function ojs_define at 0x117100040&gt;
 plt             module                     &lt;module 'matplotlib.pyplo&lt;...&gt;es/matplotlib/pyplot.py'&gt;
 prices_per_gb   ndarray                    203: 203 elems, type `float64`, 1624 bytes
-sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x15e8664d0&gt;
+sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x15b174690&gt;
 years           ndarray                    203: 203 elems, type `float64`, 1624 bytes</code></pre>
 </div>
 </div>
@@ -526,11 +526,11 @@ Caution!
 <h2 data-number="2.2" class="anchored" data-anchor-id="data-types-and-data-structures"><span class="header-section-number">2.2</span> Data Types and Data Structures</h2>
 <p>From a computational point of view, it would be efficient if the information regarding the type of data is also included in the variable. The reason this information is required is because the data that the variable contains can vary. Hence this variable should be able to accomodate the possible variations. For example, an integer variable requires lesser memory than a real number. Hence, including this information is essential for storing and processing data. In python, the data type is automatically specified during variable creation. The basic data types are boolean, int, float, string, list, tuple, dictionary, set.</p>
 <p>Let us create an integer and a real number !</p>
-<div id="97dcdd0b" class="cell" data-execution_count="8">
+<div id="60519408" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>an_integer <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>a_real_number <span class="op">=</span> <span class="fl">1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8affe75f" class="cell" data-execution_count="9">
+<div id="bc169c26" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>whos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Variable        Type                       Data/Info
@@ -540,21 +540,21 @@ a_real_number   float                      1.0
 an_integer      int                        1
 ax              Axes                       Axes(0.125,0.11;0.62x0.77)
 cm              module                     &lt;module 'matplotlib.cm' f&lt;...&gt;ckages/matplotlib/cm.py'&gt;
-cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x117954210&gt;
+cmap            LinearSegmentedColormap    &lt;matplotlib.colors.Linear&lt;...&gt;ap object at 0x11192dd10&gt;
 fig             Figure                     Figure(1056x480)
 i               int                        201
 n_specimens     int                        15
-norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x15e59d850&gt;
+norm            LogNorm                    &lt;matplotlib.colors.LogNorm object at 0x127ed9610&gt;
 np              module                     &lt;module 'numpy' from '/Us&lt;...&gt;kages/numpy/__init__.py'&gt;
-ojs_define      function                   &lt;function ojs_define at 0x1310c0040&gt;
+ojs_define      function                   &lt;function ojs_define at 0x117100040&gt;
 plt             module                     &lt;module 'matplotlib.pyplo&lt;...&gt;es/matplotlib/pyplot.py'&gt;
 prices_per_gb   ndarray                    203: 203 elems, type `float64`, 1624 bytes
-sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x15e8664d0&gt;
+sm              ScalarMappable             &lt;matplotlib.cm.ScalarMapp&lt;...&gt;le object at 0x15b174690&gt;
 years           ndarray                    203: 203 elems, type `float64`, 1624 bytes</code></pre>
 </div>
 </div>
 <p>As you can see, the type of a_real_number is float. Float is a type of data that can include decimal values. Given a variable, the type can be extracted using the function <code>type()</code>.</p>
-<div id="070ae732" class="cell" data-execution_count="10">
+<div id="c93b18d1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(an_integer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>int</code></pre>
@@ -570,7 +570,7 @@ years           ndarray                    203: 203 elems, type `float64`, 1624 
 <li>complex - holds complex numbers (with float representations of the real and imaginary part).</li>
 </ol>
 <p>The constructors <code>int()</code>, <code>float()</code>, and <code>complex()</code> can be used to produce numbers of a specific type.</p>
-<div id="cb386727" class="cell" data-execution_count="11">
+<div id="d90d38b9" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sys.float_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -579,19 +579,19 @@ years           ndarray                    203: 203 elems, type `float64`, 1624 
 </div>
 <p>Because we are limited by the resolution of the maschine to represent data, we are limited to what we can represent. In the above output from python, epsilon refers to the smallest resolution of the machine. This means that a value <span class="math inline">\(\delta = a-b &lt; epsilon / 2\)</span> cannot be represented.</p>
 <p>We can test this using the following code !</p>
-<div id="4bcb5643" class="cell" data-execution_count="12">
+<div id="14a5406a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="5a59c781" class="cell" data-execution_count="13">
+<div id="da46bd5a" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">*</span><span class="dv">10</span><span class="op">**-</span><span class="dv">16</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="63bf2878" class="cell" data-execution_count="14">
+<div id="f1a26344" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.7</span><span class="op">*</span><span class="fl">2.220446049250313</span><span class="op">*</span><span class="dv">10</span><span class="op">**-</span><span class="dv">16</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>False</code></pre>
@@ -681,7 +681,7 @@ years           ndarray                    203: 203 elems, type `float64`, 1624 
 <section id="boolean" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="boolean"><span class="header-section-number">2.2.2</span> Boolean</h3>
 <p>One of the key components of programming is the use of testing the truth value of certain operations. The data type used to represent this is the bool data type. Boolean variable can either be True or False. Numeric data types can be converted to boolean data type using the <code>bool()</code> function. Except the value 0, all other numerical values would give True.</p>
-<div id="2543b2a8" class="cell" data-execution_count="15">
+<div id="7d5f0082" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>start_experiment <span class="op">=</span> <span class="va">True</span> <span class="co"># initializing a boolean variable</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>specimen_indicator <span class="op">=</span> <span class="bu">bool</span>(n_specimens) <span class="co"># converting numeric to boolean type</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>specimen_indicator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -689,13 +689,13 @@ years           ndarray                    203: 203 elems, type `float64`, 1624 
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="23b5e220" class="cell" data-execution_count="16">
+<div id="9d074f72" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(specimen_indicator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="8eca3b68" class="cell" data-execution_count="17">
+<div id="103e0299" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bool</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>False</code></pre>
@@ -785,51 +785,51 @@ Caution
 <section id="strings" class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="strings"><span class="header-section-number">2.2.3</span> Strings</h3>
 <p>An important data type for representing textual data, especially when processing files etc. is the string data type. Strings can be sequences of letters, numbers, symbols, and spaces. In Python, strings can be almost any length and can also contain spaces. Strings are immutable, which means that you cannot change their characters. To create a string in Python, you can use single quotes (’’), double quotes (““) or triple quotes (”““).</p>
-<div id="622a590e" class="cell" data-execution_count="18">
+<div id="9abbdf12" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">'database_xmcv_21.csv'</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>database_xmcv_21.csv</code></pre>
 </div>
 </div>
-<div id="ff84ea6e" class="cell" data-execution_count="19">
+<div id="799c08c0" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>str</code></pre>
 </div>
 </div>
 <p>One of the frequently used operation on strings is <strong>indexing</strong> and <strong>slicing</strong>. This is used to extract and manipulate string data.</p>
-<div id="28f3834f" class="cell" data-execution_count="20">
+<div id="8412b22e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">0</span>] <span class="co"># first symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>'d'</code></pre>
 </div>
 </div>
-<div id="5944d7e9" class="cell" data-execution_count="21">
+<div id="63ad0aab" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">1</span>] <span class="co"># second symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>'a'</code></pre>
 </div>
 </div>
-<div id="9ad21404" class="cell" data-execution_count="22">
+<div id="eb034704" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="op">-</span><span class="dv">2</span>] <span class="co"># last symbol</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>'s'</code></pre>
 </div>
 </div>
-<div id="262ed71d" class="cell" data-execution_count="23">
+<div id="bba79865" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>filename[<span class="dv">0</span>:<span class="dv">16</span>:<span class="dv">3</span>] <span class="co"># [start:stop:step]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>'dasxv1'</code></pre>
 </div>
 </div>
-<div id="c48d8717" class="cell" data-execution_count="24">
+<div id="b3d3e59e" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>filename[::<span class="op">-</span><span class="dv">1</span>] <span class="co"># reverse text</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>'vsc.12_vcmx_esabatad'</code></pre>
 </div>
 </div>
-<div id="cdb10f47" class="cell" data-execution_count="25">
+<div id="ad936d02" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>filename.center(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>'                                        database_xmcv_21.csv                                        '</code></pre>
@@ -1033,71 +1033,71 @@ Caution
 <section id="list-tuples" class="level3" data-number="2.2.4">
 <h3 data-number="2.2.4" class="anchored" data-anchor-id="list-tuples"><span class="header-section-number">2.2.4</span> List, Tuples</h3>
 <p>A list is an ordered collection of items. Lists are mutable, which means that their elements can be added, removed, or modified. To create a list in Python, you can use square brackets [] and separate the elements by commas. The contents of the list can be any of the aformentioned elementary data type.</p>
-<div id="ec18ad0b" class="cell" data-execution_count="26">
+<div id="7789223b" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far <span class="op">=</span> [<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="va">True</span>, filename]</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>[1, 1.5, True, 'database_xmcv_21.csv']</code></pre>
 </div>
 </div>
-<div id="c975f353" class="cell" data-execution_count="27">
+<div id="06d969e7" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>'database_xmcv_21.csv'</code></pre>
 </div>
 </div>
-<div id="69f5d04f" class="cell" data-execution_count="28">
+<div id="79a6b23a" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>] <span class="op">=</span> <span class="st">'database_xcmm_45.csv'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="92386067" class="cell" data-execution_count="29">
+<div id="bb406802" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>'database_xcmm_45.csv'</code></pre>
 </div>
 </div>
-<div id="738c7287" class="cell" data-execution_count="30">
+<div id="4698ed56" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data_discussed_so_far) <span class="co"># get the type</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>list</code></pre>
 </div>
 </div>
-<div id="39f8deae" class="cell" data-execution_count="31">
+<div id="41f34d07" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>'database_xcmm_45.csv'</code></pre>
 </div>
 </div>
-<div id="7a25036b" class="cell" data-execution_count="32">
+<div id="8cb57e48" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">1</span>:<span class="dv">3</span>:<span class="dv">1</span>] <span class="co"># start stop step</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>[1.5, True]</code></pre>
 </div>
 </div>
-<div id="5b361e7b" class="cell" data-execution_count="33">
+<div id="cff7dcd5" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far[<span class="dv">2</span>:<span class="dv">4</span>] <span class="co">#start, stop, location of final item + 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>[True, 'database_xcmm_45.csv']</code></pre>
 </div>
 </div>
 <p>The colon operator denotes start : end + 1. data_discussed_so_far[2:4]returns the 2nd element, and 3rd element but not the fourth even though 3 is used in the index.</p>
-<div id="e7c52bf3" class="cell" data-execution_count="34">
+<div id="502fb3b5" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far.append(<span class="st">'database_vbnmx_25.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6822bce8" class="cell" data-execution_count="35">
+<div id="6a075795" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>data_discussed_so_far</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>[1, 1.5, True, 'database_xcmm_45.csv', 'database_vbnmx_25.csv']</code></pre>
 </div>
 </div>
 <p>A tuple is similar to a list, but it is immutable. Once a tuple is created, you cannot change its elements. To create a tuple in Python, you can use parentheses () and separate the elements by commas.</p>
-<div id="4c162c40" class="cell" data-execution_count="36">
+<div id="b3e28246" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>my_numbers <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(my_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>tuple</code></pre>
 </div>
 </div>
-<div id="e3b53f6d" class="cell" data-execution_count="37">
+<div id="36a7dc12" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>my_numbers[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>4</code></pre>
@@ -1201,31 +1201,31 @@ Note
 </div>
 </div>
 <p>Keys can be a string, number or even tuple (but not a list). In contrast to the list where data is indexed by integer values denoting thier position in the list, the dictionary can be indexed using the keys. Dictionaries can be used to organize data and avoid errors while indexing and extracting information.</p>
-<div id="3037c14b" class="cell" data-execution_count="38">
+<div id="1d2d80b7" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="op">=</span> {<span class="st">'viscosity'</span>:[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="st">'stiffness'</span>:<span class="dv">5</span>} <span class="co"># create a dictionary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f748891c" class="cell" data-execution_count="39">
+<div id="05949f6d" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>material_properties</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>{'viscosity': [2, 2, 3, 4], 'stiffness': 5}</code></pre>
 </div>
 </div>
-<div id="dd7e6e1d" class="cell" data-execution_count="40">
+<div id="c1c8b9ba" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>material_properties[<span class="st">'density'</span>] <span class="op">=</span> <span class="dv">1</span> <span class="co"># Add new item into the dictionary through initialization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5f4b40ba" class="cell" data-execution_count="41">
+<div id="f128808e" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="co"># look at the dictionary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>{'viscosity': [2, 2, 3, 4], 'stiffness': 5, 'density': 1}</code></pre>
 </div>
 </div>
-<div id="212b57ac" class="cell" data-execution_count="42">
+<div id="e3b3fce1" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>material_properties[<span class="st">'viscosity'</span>][<span class="op">-</span><span class="dv">1</span>] <span class="co"># extract the value of the key 'density'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>4</code></pre>
 </div>
 </div>
-<div id="56ace200" class="cell" data-execution_count="43">
+<div id="59763990" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(material_properties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>dict</code></pre>
@@ -1293,7 +1293,7 @@ Note
 <section id="set" class="level3" data-number="2.2.6">
 <h3 data-number="2.2.6" class="anchored" data-anchor-id="set"><span class="header-section-number">2.2.6</span> Set</h3>
 <p>A set is an unordered collection of unique elements. Sets are mutable, which means that you can add or remove elements from them. To create a set in Python, you can use curly braces {} or the <code>set()</code> function. Set theoretical rules like union, intersection and difference can be applied on this data type. It is specified by comma-seperated data in curly braces. The command <code>set()</code> creates a set.</p>
-<div id="993ad198" class="cell" data-execution_count="44">
+<div id="7c186312" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>my_integers <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>}</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(my_integers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
@@ -1393,27 +1393,27 @@ Note
 <h2 data-number="2.4" class="anchored" data-anchor-id="saving-data"><span class="header-section-number">2.4</span> Saving data</h2>
 <p>The pickle module in Python is used for serializing and deserializing Python objects. Serialization is the process of converting an object into a byte stream, and deserialization is the process of converting a byte stream back into an object.</p>
 <p>Here are some basic steps for using the pickle module in Python:</p>
-<div id="2a120a4e" class="cell" data-execution_count="45">
+<div id="a18adfb4" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4b1b68f8" class="cell" data-execution_count="46">
+<div id="eaf442a5" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>material_properties <span class="op">=</span> {<span class="st">'Density [kg/m^3]'</span>: <span class="dv">1000</span>, <span class="st">'viscosity [Pa s]'</span>: <span class="dv">25</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a76d0961" class="cell" data-execution_count="47">
+<div id="aa7de13b" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>material_properties</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
 <pre><code>{'Density [kg/m^3]': 1000, 'viscosity [Pa s]': 25}</code></pre>
 </div>
 </div>
-<div id="a1e7ee9b" class="cell" data-execution_count="48">
+<div id="531ce0a3" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'my_material_properties.pkl'</span>, <span class="st">'wb'</span>) <span class="im">as</span> my_file:</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    pickle.dump(material_properties, my_file) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3915e444" class="cell" data-execution_count="49">
+<div id="2864c255" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'my_material_properties.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> my_file:</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    material_properties_imported <span class="op">=</span> pickle.load(my_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f6532778" class="cell" data-execution_count="50">
+<div id="a5f77cdd" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>material_properties_imported</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>{'Density [kg/m^3]': 1000, 'viscosity [Pa s]': 25}</code></pre>
@@ -1437,7 +1437,7 @@ Note
 <section id="help" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="help"><span class="header-section-number">2.5</span> Help</h2>
 <p>Applying the function <code>help</code> on any python object, the details of the object can be retrieved.</p>
-<div id="b5a1fe79" class="cell" data-execution_count="51">
+<div id="bf830287" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(<span class="bu">print</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Help on built-in function print in module builtins:
@@ -1516,7 +1516,7 @@ print(*args, sep=' ', end='\n', file=None, flush=False)
 </tr>
 </tbody>
 </table>
-<div id="1427f9f3" class="cell" data-execution_count="52">
+<div id="ff90e928" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input data</span></span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>average_temperature_change <span class="op">=</span> <span class="fl">1.2</span>  <span class="co"># Example change in degrees Celsius</span></span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>co2_emissions <span class="op">=</span> <span class="dv">38</span>  <span class="co"># CO2 emissions in gigatons for the current year</span></span>
@@ -1610,10 +1610,10 @@ Emissions Trend: False</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="d4d4c0e3" class="cell" data-execution_count="53">
+<div id="43e5056e" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>environmental_data <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="69e7c650" class="cell" data-execution_count="54">
+<div id="8d2492f0" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span>
 <span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
@@ -1644,12 +1644,12 @@ Emissions Trend: False</code></pre>
 <span id="cb94-28"><a href="#cb94-28" aria-hidden="true" tabindex="-1"></a>    pickle.dump(environmental_data, my_file) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Import the database and view it !</p>
-<div id="31e662fc" class="cell" data-execution_count="55">
+<div id="71debc32" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'environmental_state.dbs'</span>, <span class="st">'rb'</span>) <span class="im">as</span> my_file:</span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    my_data_that_is_imported <span class="op">=</span> pickle.load(my_file)</span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_data_that_is_imported)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[{'date and time': ('09/22/2024, 22:53:28', 6), 'temperature': 33.0, 'humidity': 65, 'is_raining': True, 'suitable_for_plant_growth': False, 'risk_of_equipment_damage': False, 'additional_watering_needed': False, 'frost_warning': False, 'inspection_needed': False}]</code></pre>
+<pre><code>[{'date and time': ('09/22/2024, 23:02:02', 6), 'temperature': 33.0, 'humidity': 65, 'is_raining': True, 'suitable_for_plant_growth': False, 'risk_of_equipment_damage': False, 'additional_watering_needed': False, 'frost_warning': False, 'inspection_needed': False}]</code></pre>
 </div>
 </div>
 <hr>
@@ -2143,7 +2143,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

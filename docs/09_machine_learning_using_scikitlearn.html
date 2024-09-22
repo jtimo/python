@@ -312,7 +312,7 @@ Caution
 <section id="regression" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="regression"><span class="header-section-number">9.1</span> Regression</h2>
 <p>Regression is a fundamental concept in machine learning and statistics, primarily used for predicting continuous outcomes. It involves modeling the relationship between a dependent variable (often called the target or output) and one or more independent variables (called features or predictors). The goal of regression is to find a function that best describes the relationship between the input and output data, allowing us to make predictions on new, unseen data points.</p>
-<div id="2a826cfa" class="cell" data-tags="[]" data-execution_count="1">
+<div id="0ae9798c" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#%matplotlib inline</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -320,7 +320,7 @@ Caution
 <section id="true-physics" class="level3" data-number="9.1.1">
 <h3 data-number="9.1.1" class="anchored" data-anchor-id="true-physics"><span class="header-section-number">9.1.1</span> True Physics</h3>
 <p>Let us assume that we have the true physical description of the process that relates the input and output data described by a certain function. Usually we do not have this. Here, we are using this just to find out how much far we are from the model that is predicted from just a few observations !</p>
-<div id="6159e4a8" class="cell" data-execution_count="2">
+<div id="04db832b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the true physical process and draw some data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>input_start <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>input_end   <span class="op">=</span> <span class="dv">5</span></span>
@@ -331,16 +331,16 @@ Caution
 <pre><code>(1000, 1)</code></pre>
 </div>
 </div>
-<div id="fbe221c3" class="cell" data-execution_count="3">
+<div id="48487533" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>output_true <span class="op">=</span> np.squeeze(input_true <span class="op">*</span> np.sin(input_true)<span class="op">*</span>np.cos(input_true)<span class="op">*</span>np.tan(input_true))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a33679c9" class="cell" data-execution_count="4">
+<div id="a4a45b00" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>output_true.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>(1000,)</code></pre>
 </div>
 </div>
-<div id="9e303c18" class="cell" data-execution_count="5">
+<div id="43600d6a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.plot(input_true, output_true, label<span class="op">=</span><span class="st">'True Physics'</span>, linestyle<span class="op">=</span><span class="st">"-"</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
@@ -362,11 +362,11 @@ Caution
 </section>
 <section id="experimental-measurements" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="experimental-measurements"><span class="header-section-number">9.1.2</span> Experimental measurements</h3>
-<div id="57bb8efd" class="cell" data-execution_count="6">
+<div id="56cf8901" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>available_measurements <span class="op">=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us randomly extract 6 points from the true physical process. This is like performing 10 experiments at different locations. Right now these are random.</p>
-<div id="c17162b3" class="cell" data-execution_count="7">
+<div id="bffa0a59" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.RandomState(<span class="dv">0</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>measurement_indices <span class="op">=</span> rng.choice(np.arange(input_true.size), size<span class="op">=</span>available_measurements, replace<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>measurement_indices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -375,7 +375,7 @@ Caution
 </div>
 </div>
 <p>Add gaussian noise with a given standard deviation</p>
-<div id="11296f5b" class="cell" data-execution_count="8">
+<div id="84e9053f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>noise_std <span class="op">=</span> <span class="fl">0.15</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>input_measurement <span class="op">=</span> input_true[measurement_indices]</span>
@@ -396,17 +396,17 @@ Caution
          4.76322524, -0.46277436,  0.05528432,  0.46277436,  0.03142975]))</code></pre>
 </div>
 </div>
-<div id="4171c231" class="cell" data-execution_count="9">
+<div id="68f73b7b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>output_measurement <span class="op">=</span> output_measurement <span class="op">+</span> rng.normal(loc<span class="op">=</span><span class="fl">0.0</span>, scale<span class="op">=</span>noise_std, size<span class="op">=</span>output_measurement.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a49d6374" class="cell" data-execution_count="10">
+<div id="f3737af5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>output_measurement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array([ 4.72151009,  3.09471209,  0.52477185,  1.45049338,  0.08883534,
         4.47835002, -0.6925601 ,  0.06668465,  0.38367645,  0.00822619])</code></pre>
 </div>
 </div>
-<div id="847cf26d" class="cell" data-execution_count="11">
+<div id="a073165a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.errorbar(input_measurement, output_measurement, noise_std, linestyle<span class="op">=</span><span class="st">'None'</span>, color<span class="op">=</span><span class="st">'tab:red'</span>, marker<span class="op">=</span><span class="st">'.'</span>, </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>             markersize<span class="op">=</span><span class="dv">10</span>,label<span class="op">=</span><span class="st">'Measurements'</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,18 +433,18 @@ Caution
 <section id="kernel-ridge-regression" class="level3" data-number="9.1.3">
 <h3 data-number="9.1.3" class="anchored" data-anchor-id="kernel-ridge-regression"><span class="header-section-number">9.1.3</span> Kernel Ridge Regression</h3>
 <p>Kernel Ridge Regression (KRR) is a versatile and powerful regression technique that combines the advantages of ridge regression and kernel methods. It extends the linear ridge regression model by mapping the input features into a higher-dimensional space using a kernel function, which allows it to capture complex, non-linear relationships between the input variables and the target variable. The kernel function, such as the Gaussian (RBF), polynomial, or linear kernel, plays a crucial role in transforming the data and enabling the model to perform well on a wide range of problems. By incorporating a regularization term in the objective function, KRR mitigates overfitting and enhances the model’s generalization capabilities. This makes it particularly useful in scenarios where the relationship between the predictors and the response variable is highly non-linear, and the risk of overfitting is significant.</p>
-<div id="a288d46a" class="cell" data-execution_count="12">
+<div id="2f52693f" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.gaussian_process.kernels <span class="im">import</span> RBF</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> <span class="dv">1</span> <span class="op">*</span> RBF(length_scale<span class="op">=</span><span class="fl">1.0</span>, length_scale_bounds<span class="op">=</span>(<span class="fl">1e-2</span>, <span class="fl">1e2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0a6d7069" class="cell" data-execution_count="13">
+<div id="182403d0" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>output_measurement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>array([ 4.72151009,  3.09471209,  0.52477185,  1.45049338,  0.08883534,
         4.47835002, -0.6925601 ,  0.06668465,  0.38367645,  0.00822619])</code></pre>
 </div>
 </div>
-<div id="4c322dc5" class="cell" data-execution_count="14">
+<div id="09e1056c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.kernel_ridge <span class="im">import</span> KernelRidge</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>krr <span class="op">=</span> KernelRidge(kernel <span class="op">=</span> kernel, alpha<span class="op">=</span>noise_std<span class="op">**</span><span class="dv">2</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -454,7 +454,7 @@ Caution
 </div>
 </div>
 <p><strong>Make predictions</strong></p>
-<div id="1a493d7a" class="cell" data-execution_count="15">
+<div id="1a7a0f07" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>new_input_measurements <span class="op">=</span> np.linspace(input_start, input_end, <span class="dv">20</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>new_input_measurements</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -480,7 +480,7 @@ Caution
        [ 5.        ]])</code></pre>
 </div>
 </div>
-<div id="acf961a2" class="cell" data-execution_count="16">
+<div id="ef753392" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>output_krr_prediction <span class="op">=</span> krr.predict(new_input_measurements)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>output_krr_prediction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -490,7 +490,7 @@ Caution
         1.30458386,  2.54799936,  3.71159639,  4.43808167,  4.56633603])</code></pre>
 </div>
 </div>
-<div id="f1b77c69" class="cell" data-execution_count="17">
+<div id="69c0e65e" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.errorbar(input_measurement, output_measurement, noise_std, linestyle<span class="op">=</span><span class="st">'None'</span>, color<span class="op">=</span><span class="st">'tab:red'</span>, marker<span class="op">=</span><span class="st">'.'</span>, </span>
@@ -514,10 +514,10 @@ Caution
 <section id="gaussian-process-regression" class="level3" data-number="9.1.4">
 <h3 data-number="9.1.4" class="anchored" data-anchor-id="gaussian-process-regression"><span class="header-section-number">9.1.4</span> Gaussian Process Regression</h3>
 <p>Gaussian Process Regression (GPR) is a non-parametric, Bayesian approach to regression that provides a flexible and powerful framework for modeling complex data. Unlike traditional parametric models, GPR does not assume a fixed form for the underlying function, instead, it defines a distribution over possible functions directly. This is achieved through the use of a Gaussian process, which is a collection of random variables, any finite number of which have a joint Gaussian distribution. A key component of GPR is the kernel function, which determines the covariance structure of the data and allows the model to capture intricate patterns and correlations. By integrating out the parameters, GPR naturally incorporates uncertainty in the predictions, offering not only point estimates but also a measure of confidence in these predictions. This probabilistic nature makes GPR particularly well-suited for applications where quantifying uncertainty is important, such as in Bayesian optimization, time-series forecasting, and spatial data analysis. The flexibility and robustness of GPR make it an essential tool for tackling complex regression tasks in various scientific and engineering domains.</p>
-<div id="7d67911c" class="cell" data-execution_count="18">
+<div id="24f9d1c1" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.gaussian_process <span class="im">import</span> GaussianProcessRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="77f812bf" class="cell" data-execution_count="19">
+<div id="849d63ef" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#help(GaussianProcessRegressor)</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>gaussian_process <span class="op">=</span> GaussianProcessRegressor(kernel<span class="op">=</span>kernel, alpha<span class="op">=</span>noise_std<span class="op">**</span><span class="dv">2</span>, n_restarts_optimizer<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>gaussian_process.fit(input_measurement, output_measurement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -528,11 +528,11 @@ Caution
 </div>
 </div>
 <p><strong>Make predictions</strong></p>
-<div id="6a176ae7" class="cell" data-tags="[]" data-execution_count="20">
+<div id="bac07a2c" class="cell" data-tags="[]" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>new_input_measurements <span class="op">=</span> np.linspace(input_start, input_end, <span class="dv">50</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>gpr_mean_prediction, gpr_std_prediction <span class="op">=</span> gaussian_process.predict(new_input_measurements, return_std<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d71110e3" class="cell" data-execution_count="21">
+<div id="2df5bf47" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.plot(input_true, output_true, label<span class="op">=</span><span class="st">'True Physics'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.errorbar(input_measurement, output_measurement, noise_std, linestyle<span class="op">=</span><span class="st">'None'</span>, color<span class="op">=</span><span class="st">'tab:red'</span>, marker<span class="op">=</span><span class="st">'.'</span>, </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>             markersize<span class="op">=</span><span class="dv">10</span>,label<span class="op">=</span><span class="st">"Observations"</span>)</span>
@@ -564,10 +564,10 @@ Caution
 <section id="decision-tree-regression" class="level3" data-number="9.1.5">
 <h3 data-number="9.1.5" class="anchored" data-anchor-id="decision-tree-regression"><span class="header-section-number">9.1.5</span> Decision Tree Regression</h3>
 <p>Decision Tree Regression is a non-linear regression technique that models the relationship between input features and a continuous target variable through a tree-like structure of decisions. This method involves recursively partitioning the feature space into distinct and non-overlapping regions by making binary decisions at each node of the tree. Each split is chosen to maximize the homogeneity of the target variable within the resulting regions, typically using criteria such as mean squared error reduction. The final prediction is made by averaging the target variable within each region, corresponding to the leaf nodes of the tree. Decision Tree Regression is highly interpretable, as the hierarchical structure of the tree can be easily visualized and understood. It is capable of capturing complex interactions between features without requiring any specific assumptions about the underlying data distribution. However, decision trees can be prone to overfitting, especially when the tree grows too deep, which can be mitigated through techniques like pruning or by using ensemble methods such as Random Forests or Gradient Boosting. This makes Decision Tree Regression a versatile and powerful tool for various regression tasks, particularly when interpretability and the ability to model non-linear relationships are crucial.</p>
-<div id="bd2cf557" class="cell" data-execution_count="22">
+<div id="551c6bb4" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c2be9e87" class="cell" data-execution_count="23">
+<div id="a27e1e6f" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit regression model</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>dtr_1 <span class="op">=</span> DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>dtr_2 <span class="op">=</span> DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">5</span>)</span>
@@ -581,14 +581,14 @@ Caution
 </div>
 </div>
 <p><strong>Make predictions</strong></p>
-<div id="dd968a84" class="cell" data-execution_count="24">
+<div id="ba51649d" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>new_input_measurements <span class="op">=</span> np.linspace(input_start, input_end, <span class="dv">50</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>dtr_prediction_1 <span class="op">=</span> dtr_1.predict(new_input_measurements)</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>dtr_prediction_2 <span class="op">=</span> dtr_2.predict(new_input_measurements)</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>dtr_prediction_3 <span class="op">=</span> dtr_3.predict(new_input_measurements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="99574c31" class="cell" data-execution_count="25">
+<div id="79243e32" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.plot(input_true, output_true, label='True Physics', linestyle="-", color='black')</span></span>
@@ -624,7 +624,7 @@ Caution
 <li>k-Nearest Neighbors (k-NN): A non-parametric algorithm that classifies data points based on the k closest training examples in the feature space.</li>
 <li>Neural Networks: A machine learning model inspired by the structure and function of the human brain, consisting of interconnected nodes that process information and produce output.</li>
 </ul>
-<div id="6c3bd333" class="cell" data-execution_count="26">
+<div id="1f48e559" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import libraries</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
@@ -638,11 +638,11 @@ Caution
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neural_network <span class="im">import</span> MLPClassifier</span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="583a3c13" class="cell" data-execution_count="27">
+<div id="3fdf4b83" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate toy dataset</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">1000</span>, n_features<span class="op">=</span><span class="dv">10</span>, n_informative<span class="op">=</span><span class="dv">5</span>, n_classes<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="76a54a44" class="cell" data-execution_count="28">
+<div id="4d1cc041" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>array([[-2.56891645, -0.25740861, -2.67935708, ..., -1.21337007,
@@ -660,7 +660,7 @@ Caution
         -0.54079228, -1.0986882 ]])</code></pre>
 </div>
 </div>
-<div id="a79994d6" class="cell" data-execution_count="29">
+<div id="e2190fe5" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>array([1, 1, 0, 1, 0, 0, 2, 2, 1, 2, 0, 0, 1, 1, 0, 2, 1, 1, 0, 1, 0, 1,
@@ -711,11 +711,11 @@ Caution
        1, 2, 1, 1, 1, 2, 1, 0, 0, 1])</code></pre>
 </div>
 </div>
-<div id="35643f1e" class="cell" data-execution_count="30">
+<div id="427a943c" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split dataset into training and testing sets</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="89a8a9b1" class="cell" data-execution_count="31">
+<div id="b97156f5" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize models</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Logistic Reg'</span>: LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>),</span>
@@ -727,7 +727,7 @@ Caution
 <span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Neural Network'</span>: MLPClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f22e8647" class="cell" data-execution_count="32">
+<div id="83021f61" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit and evaluate models</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
@@ -742,7 +742,7 @@ Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn
 </code></pre>
 </div>
 </div>
-<div id="2e216a3f" class="cell" data-execution_count="33">
+<div id="af8ce21a" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>{'Logistic Reg': 0.72,
@@ -771,18 +771,18 @@ Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn
 <li><p>DBSCAN Clustering: This algorithm groups together points that are closely packed together while leaving out points that are far away from the clusters. The algorithm does not require specifying the number of clusters beforehand, and it can handle noisy data. The Scikit-learn library provides an implementation of DBSCAN clustering in Python.</p></li>
 <li><p>Gaussian Mixture Model (GMM) Clustering: This algorithm models the probability distribution of the data using a mixture of Gaussian distributions. The algorithm determines the optimal number of clusters and their parameters by maximizing the likelihood of the data. The Scikit-learn library provides an implementation of GMM clustering in Python.</p></li>
 </ul>
-<div id="c36d951f" class="cell" data-execution_count="34">
+<div id="ae739b8f" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans, AgglomerativeClustering, DBSCAN</span>
 <span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.mixture <span class="im">import</span> GaussianMixture</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="291782ba" class="cell" data-execution_count="35">
+<div id="43dca1f4" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a toy dataset with 100 data points and 5 clusters</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">100</span>, centers<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a24cdd35" class="cell" data-execution_count="36">
+<div id="f2505aa7" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>X</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>array([[ -6.2927701 ,  -4.68965397],
@@ -887,7 +887,7 @@ Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn
        [  3.80066131,   1.66395731]])</code></pre>
 </div>
 </div>
-<div id="3ad9ac9f" class="cell" data-execution_count="37">
+<div id="43f1a8f7" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>array([2, 4, 0, 4, 3, 2, 1, 1, 1, 0, 0, 2, 4, 0, 1, 3, 4, 4, 2, 3, 3, 1,
@@ -897,7 +897,7 @@ Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn
        0, 0, 3, 0, 2, 1, 2, 0, 2, 0, 1, 1])</code></pre>
 </div>
 </div>
-<div id="975abb98" class="cell" data-execution_count="38">
+<div id="7c238e8a" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform K-Means clustering</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>kmeans_labels <span class="op">=</span> kmeans.fit_predict(X)</span>
@@ -920,7 +920,7 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
 </code></pre>
 </div>
 </div>
-<div id="aec1b01a" class="cell" data-execution_count="39">
+<div id="37ed3e7e" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>kmeans_labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>array([1, 4, 0, 4, 3, 1, 2, 2, 2, 0, 0, 1, 4, 0, 2, 3, 4, 4, 1, 3, 3, 2,
@@ -930,7 +930,7 @@ The default value of `n_init` will change from 10 to 'auto' in 1.4. Set the valu
        0, 0, 3, 0, 1, 2, 1, 0, 1, 0, 2, 2], dtype=int32)</code></pre>
 </div>
 </div>
-<div id="b0d99531" class="cell" data-execution_count="40">
+<div id="0ff21638" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the clustering results</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">4</span>))</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>plt.subplot(<span class="dv">141</span>)</span>
@@ -1406,7 +1406,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
