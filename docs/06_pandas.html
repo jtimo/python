@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Dataframes and Series for Data Wrangling – Python for Engineers and Scientists (v1.0)</title>
+<title>6&nbsp; Dataframes and Series for Data Wrangling – Python for Engineers and Scientists (v1.5)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <img src="./images/book_cover.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Python for Engineers and Scientists (v1.0)</span>
+    <span class="navbar-title">Python for Engineers and Scientists (v1.5)</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Pandas is a popular open-source Python library used for data manipulation, analysis, and cleaning. It is built on top of NumPy and provides easy-to-use data structures and data analysis tools. Pandas is widely used in data science, machine learning, and other fields where data analysis is required. Its strengths lie in its ability to work with structured data, such as tabular data, and handle missing or incomplete data.</p>
 <p>The key data structures in Pandas are the Series and DataFrame. A Series is a one-dimensional array-like object that can hold any data type, while a DataFrame is a two-dimensional table-like data structure with columns of different data types. Pandas provides a wide range of functions to manipulate, transform, and analyze data, such as filtering, grouping, merging, and reshaping data. It also has powerful data visualization capabilities, allowing users to easily create charts and graphs to better understand their data.</p>
 <p>This tutorial will cover the basics of data processing using Pandas, including data import, data exploration, data cleaning, and data visualization. We will also discuss common data preprocessing techniques and best practices for working with data in Pandas. Please note that this is a very rudimentary introduction to Pandas and there are many more advanced features and functions available in the library that will not be covered here. There are dedicated semester-long courses on Pandas and data analysis that cover these topics in more detail.</p>
-<div id="32bb5305" class="cell" data-execution_count="1">
+<div id="53e4a335" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># alias is pd</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install xlrd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -293,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There are two core objects in pandas: the DataFrame and the Series.</p>
 <p>A DataFrame is a table. It contains an array of individual entries, each of which has a certain value. Each entry corresponds to a row (or record) and a column.</p>
 <p>We can create a dataframe using the following explicit expression !</p>
-<div id="2d38431c" class="cell" data-tags="[]" data-execution_count="2">
+<div id="98968f0c" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'Density'</span>: [<span class="dv">997</span>, <span class="dv">8000</span>], <span class="st">'Stiffness'</span>: [<span class="dv">0</span>, <span class="dv">200</span>]}, index<span class="op">=</span>[<span class="st">'Water'</span>, <span class="st">'Steel'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -325,13 +325,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>For the purpose of this tutorial, let us import an excel file with some data. The data is stored in the folder. First store the data in a certain location in our PC. It is recommended that you create a folder called <code>data</code> in the folder where this Jupyter notebook is stored. Then save the data provided in moodle in this data folder.</p>
-<div id="fbc66177" class="cell" data-execution_count="3">
+<div id="09da7668" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>folder <span class="op">=</span> <span class="st">'./data/'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="07095931" class="cell" data-execution_count="4">
+<div id="b34c32ad" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_location <span class="op">=</span> folder <span class="op">+</span> <span class="st">'Concrete_Data.xls'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a67796cb" class="cell" data-execution_count="5">
+<div id="ae2eab6a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_location</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>'./data/Concrete_Data.xls'</code></pre>
@@ -339,13 +339,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>.</code> represents the directory you are in and <code>..</code> represents the parent directory.</p>
 <p>Let us now read an excel table with the following command !</p>
-<div id="a8828239" class="cell" data-execution_count="6">
+<div id="25cc8cbf" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_excel(data_location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cc1ef724" class="cell" data-execution_count="7">
+<div id="b2b10e39" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#help(pd.read_excel)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8f20af97" class="cell" data-execution_count="8">
+<div id="4702f5e2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -510,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-exploration-and-visualization" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="data-exploration-and-visualization"><span class="header-section-number">6.2</span> Data Exploration and Visualization</h2>
 <p>Sometimes the excel table or csv file is very huge, but we can take a quick look at the data using the following command that gives us the first few lines of the table ! The head function displays the first few rows of the DataFrame, while the tail function displays the last few rows. The sample function displays a random sample of the DataFrame. For example:</p>
-<div id="13cd628a" class="cell" data-execution_count="9">
+<div id="4d202188" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data.head() # display first few rows</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#data.tail() # display last few rows</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>data.sample(<span class="dv">10</span>) <span class="co"># display a random sample of 5 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -535,124 +535,124 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">892</td>
-<td>273.00</td>
+<td data-quarto-table-cell-role="th">534</td>
+<td>393.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>192.0</td>
 <td>0.00</td>
-<td>90.00</td>
-<td>199.00</td>
-<td>11.00</td>
-<td>931.00</td>
-<td>762.00</td>
-<td>28</td>
-<td>32.239898</td>
+<td>940.6</td>
+<td>785.6</td>
+<td>3</td>
+<td>19.199149</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1015</td>
-<td>322.50</td>
-<td>148.60</td>
+<td data-quarto-table-cell-role="th">692</td>
+<td>212.0</td>
+<td>141.3</td>
+<td>0.0</td>
+<td>203.5</td>
 <td>0.00</td>
-<td>185.80</td>
-<td>8.50</td>
-<td>951.00</td>
-<td>709.50</td>
-<td>28</td>
-<td>52.426376</td>
+<td>973.4</td>
+<td>750.0</td>
+<td>90</td>
+<td>39.700028</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">958</td>
-<td>259.90</td>
-<td>100.60</td>
-<td>78.40</td>
-<td>170.60</td>
+<td data-quarto-table-cell-role="th">90</td>
+<td>389.9</td>
+<td>189.0</td>
+<td>0.0</td>
+<td>145.9</td>
+<td>22.00</td>
+<td>944.7</td>
+<td>755.8</td>
+<td>3</td>
+<td>40.596347</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">562</td>
+<td>382.5</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>185.7</td>
+<td>0.00</td>
+<td>1047.8</td>
+<td>739.3</td>
+<td>7</td>
+<td>24.065470</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">114</td>
+<td>362.6</td>
+<td>189.0</td>
+<td>0.0</td>
+<td>164.9</td>
+<td>11.60</td>
+<td>944.7</td>
+<td>755.8</td>
+<td>7</td>
+<td>22.897498</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1026</td>
+<td>322.2</td>
+<td>0.0</td>
+<td>115.6</td>
+<td>196.0</td>
 <td>10.40</td>
-<td>935.70</td>
-<td>762.90</td>
+<td>817.9</td>
+<td>813.4</td>
 <td>28</td>
-<td>49.773272</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">817</td>
-<td>525.00</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>189.00</td>
-<td>0.00</td>
-<td>1125.00</td>
-<td>613.00</td>
-<td>14</td>
-<td>48.401215</td>
+<td>31.178794</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">244</td>
-<td>238.05</td>
-<td>0.00</td>
-<td>94.11</td>
-<td>186.66</td>
-<td>7.00</td>
-<td>949.91</td>
-<td>847.01</td>
+<td data-quarto-table-cell-role="th">960</td>
+<td>284.0</td>
+<td>119.7</td>
+<td>0.0</td>
+<td>168.3</td>
+<td>7.20</td>
+<td>970.4</td>
+<td>794.2</td>
+<td>28</td>
+<td>40.934880</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">526</td>
+<td>359.0</td>
+<td>19.0</td>
+<td>141.0</td>
+<td>154.0</td>
+<td>10.91</td>
+<td>942.0</td>
+<td>801.0</td>
 <td>3</td>
-<td>19.932751</td>
+<td>23.639177</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">224</td>
-<td>167.95</td>
-<td>42.08</td>
-<td>163.83</td>
-<td>121.75</td>
-<td>5.72</td>
-<td>1058.70</td>
-<td>780.11</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">85</td>
+<td>379.5</td>
+<td>151.2</td>
+<td>0.0</td>
+<td>153.9</td>
+<td>15.90</td>
+<td>1134.3</td>
+<td>605.0</td>
 <td>3</td>
-<td>7.749710</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">831</td>
-<td>154.00</td>
-<td>144.00</td>
-<td>112.00</td>
-<td>220.00</td>
-<td>10.00</td>
-<td>923.00</td>
-<td>658.00</td>
-<td>28</td>
-<td>16.499161</td>
+<td>28.599464</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">465</td>
-<td>173.81</td>
-<td>93.37</td>
-<td>159.90</td>
-<td>172.34</td>
-<td>9.73</td>
-<td>1007.20</td>
-<td>746.60</td>
-<td>100</td>
-<td>50.938487</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">872</td>
-<td>261.00</td>
-<td>100.00</td>
-<td>78.00</td>
-<td>201.00</td>
-<td>9.00</td>
-<td>864.00</td>
-<td>761.00</td>
+<td data-quarto-table-cell-role="th">977</td>
+<td>313.3</td>
+<td>145.0</td>
+<td>0.0</td>
+<td>178.5</td>
+<td>8.00</td>
+<td>1001.9</td>
+<td>688.7</td>
 <td>28</td>
-<td>32.398477</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">871</td>
-<td>159.00</td>
-<td>187.00</td>
-<td>0.00</td>
-<td>176.00</td>
-<td>11.00</td>
-<td>990.00</td>
-<td>789.00</td>
-<td>28</td>
-<td>32.763900</td>
+<td>41.053469</td>
 </tr>
 </tbody>
 </table>
@@ -661,7 +661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The data can also be sorted and explored as follows:</p>
-<div id="9444271b" class="cell" data-execution_count="10">
+<div id="40614e35" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the dataframe</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data.sort_values(by<span class="op">=</span><span class="st">'Strength'</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -754,7 +754,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-and-setting-data" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="getting-and-setting-data"><span class="header-section-number">6.3</span> Getting and Setting data</h2>
 <p>Indexing, similar to list indexing from the list data type and numpy can be used to access parts of the dataframe as follows:</p>
-<div id="945a4533" class="cell" data-execution_count="11">
+<div id="6c86d54d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using indexes to select data - similar to Numpy</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data.iloc[<span class="dv">0</span>:<span class="dv">2</span>, :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -808,11 +808,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The data can also be filtered using boolean operators. This operation can be used as a mask to extract information from the data as follows:</p>
-<div id="12b18e4d" class="cell" data-execution_count="12">
+<div id="43319de9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_data_mask <span class="op">=</span> data[<span class="st">'Age'</span>] <span class="op">&gt;</span> <span class="dv">300</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above mask can be applied as follows:</p>
-<div id="6d41f53a" class="cell" data-execution_count="13">
+<div id="39bfcd8e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boolean Indexing</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data[my_data_mask]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -1085,7 +1085,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="basic-statistics" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="basic-statistics"><span class="header-section-number">6.4</span> Basic Statistics</h2>
 <p>Having imported the dataset into Python, the data types can be identified as follows:</p>
-<div id="cf2f52f4" class="cell" data-execution_count="14">
+<div id="2837ea08" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.dtypes </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>Cement                float64
@@ -1100,7 +1100,7 @@ Strength              float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="8fb8555b" class="cell" data-execution_count="15">
+<div id="950c5dbe" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>Index(['Cement', 'Blast Furnace Slag', 'Fly Ash', 'Water ', 'Superplasticizer',
@@ -1109,7 +1109,7 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Using the function <code>unique</code> the unique data in a column can be extracted.</p>
-<div id="71568c26" class="cell" data-execution_count="16">
+<div id="e38b5f3e" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pd.unique(data[<span class="st">'Age'</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>array([ 28, 270, 365, 360,  90, 180,   3,   7,  56,  91,  14, 100, 120,
@@ -1118,7 +1118,7 @@ dtype: object</code></pre>
 </div>
 <p>We often want to calculate summary <strong>statistics</strong> grouped by subsets or attributes within fields of our data.</p>
 <p>We can calculate <strong>basic statistics</strong> for all records in a single column using the syntax below:</p>
-<div id="2a6d2d99" class="cell" data-execution_count="17">
+<div id="2f2c60b4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Strength'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>count    1030.000000
@@ -1133,16 +1133,16 @@ Name: Strength, dtype: float64</code></pre>
 </div>
 </div>
 <p>We can also group data by the unique values in a certain column. Let us compute the statistics for each unique age !</p>
-<div id="e8258722" class="cell" data-execution_count="18">
+<div id="98d3c7c2" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>grouped_data <span class="op">=</span> data.groupby(<span class="st">'Age'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8b4a3fc9" class="cell" data-execution_count="19">
+<div id="71904923" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>grouped_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x127db9c10&gt;</code></pre>
+<pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x12fcd2b90&gt;</code></pre>
 </div>
 </div>
-<div id="94f59de0" class="cell" data-execution_count="20">
+<div id="4487520d" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for all numeric columns by Age</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>grouped_data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
@@ -1552,7 +1552,7 @@ Name: Strength, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="b542c258" class="cell" data-execution_count="21">
+<div id="6080658c" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide the mean for each numeric column by Age</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>grouped_data.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -1749,7 +1749,7 @@ Name: Strength, dtype: float64</code></pre>
 </section>
 <section id="plotting" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="plotting"><span class="header-section-number">6.5</span> Plotting</h2>
-<div id="5a6af697" class="cell" data-execution_count="22">
+<div id="edf3e5dc" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure figures appear inline in Ipython Notebook</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a quick bar chart</span></span>
@@ -1766,20 +1766,20 @@ Name: Strength, dtype: float64</code></pre>
 <section id="analysis" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="analysis"><span class="header-section-number">6.6</span> Analysis</h2>
 <p>Given the full data-set, we can compute the correlation between the columns given in the dataset.</p>
-<div id="88731712" class="cell" data-execution_count="23">
+<div id="ba861be9" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>correlation_data <span class="op">=</span> data.corr(method<span class="op">=</span><span class="st">'spearman'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3c2a4a1e" class="cell" data-execution_count="24">
+<div id="93ee769d" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#correlation_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="28b82537" class="cell" data-execution_count="25">
+<div id="0dc6ff70" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># seaborn is an alternative to Matplotlib with additional plotting options !</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlation_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="06_pandas_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="06_pandas_files/figure-html/cell-26-output-1.png" width="654" height="526" class="figure-img"></a></p>
+<p><a href="06_pandas_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="06_pandas_files/figure-html/cell-26-output-1.png" width="655" height="526" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1821,7 +1821,7 @@ str.upper(): This function is used to convert all strings in a DataFrame to uppe
 
 rename(): This function is used to rename columns or indexes in a DataFrame.</code></pre>
 <p>The further options to clean data is discussed in this short subsection !</p>
-<div id="a6129e6b" class="cell" data-execution_count="26">
+<div id="03e45aaf" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1841,7 +1841,7 @@ rename(): This function is used to rename columns or indexes in a DataFrame.</co
 </div>
 </div>
 <p>The next step is to clean the data by removing missing values:</p>
-<div id="1c7fd814" class="cell" data-execution_count="27">
+<div id="2995209f" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove missing values</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna()</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1854,7 +1854,7 @@ rename(): This function is used to rename columns or indexes in a DataFrame.</co
 </div>
 </div>
 <p>Next we perform some basic data cleaning operations:</p>
-<div id="d444ddff" class="cell" data-execution_count="28">
+<div id="c541101d" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove leading and trailing whitespace from strings</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'info 1'</span>] <span class="op">=</span> df[<span class="st">'info 1'</span>].<span class="bu">str</span>.strip()</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
@@ -2405,7 +2405,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
