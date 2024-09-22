@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jithender Timothy">
 
-<title>Python for Engineers and Scientists (v1.0)</title>
+<title>Python for Engineers and Scientists (v1.5)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <img src="./images/book_cover.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Python for Engineers and Scientists (v1.0)</span>
+    <span class="navbar-title">Python for Engineers and Scientists (v1.5)</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_representing_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Representing Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Representation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,19 +190,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_writing_programs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing Programs</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Programs and Functions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_numerical_computing_using_numpy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Numerical Computing using NumPy</span></span></a>
+  <a href="./05_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Arrays and Array Operations using NumPy</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_data_analysis_using_pandas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data processing using Pandas</span></span></a>
+  <a href="./06_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dataframes and Series for Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_scientific_computing_using_scipy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Scientific Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Scientific Python (SciPy)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">About</span></span></a>
+ <span class="menu-text">About</span></a>
   </div>
 </li>
     </ul>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Python for Engineers and Scientists (v1.0)</h1>
+<h1 class="title">Python for Engineers and Scientists (v1.5)</h1>
 </div>
 
 
@@ -352,7 +352,7 @@ How long will it take to complete this book?
 <li>After navigating to the folder of your choice, now you can at the top right-hand side you will find a new button. Click on that button and choose ipykernel. This will create a new Jupyter Notebook.</li>
 </ol>
 <p>Jupyter notebook consists of cells. In these cells you can type in python code and normal text using Markdown. You can choose the type of cell from the dropdown menu in the menu bar. Click Help to get help on the user interface. Now write the following python code <code>print('my first python code in Jupyter')</code> as follows:</p>
-<div id="7f3ec3a1" class="cell" data-execution_count="1">
+<div id="c3d88974" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'my first python code in Jupyter'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>my first python code in Jupyter</code></pre>
@@ -844,7 +844,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
